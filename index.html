@@ -1,0 +1,2711 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#080c14" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="ساعت کاری" />
+<title>لیست ساعت کاری | مهدی جلالی</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&family=Noto+Naskh+Arabic:wght@400..700&family=Amiri:wght@400;700&family=Gulzar&family=Markazi+Text:wght@400..700&display=swap" rel="stylesheet">
+
+<link rel="manifest" id="manifest-link" />
+<link rel="icon" id="favicon-link" />
+
+<style>
+@font-face {
+  font-family: 'B Titr';
+  src: url('https://cdn.jsdelivr.net/gh/font-store/font-b-titr/BTitr.ttf') format('truetype'),
+       url('https://cdn.jsdelivr.net/gh/Aminsoltani/persian-fonts/BTitr.ttf') format('truetype');
+  font-weight: 400 900; font-style: normal; font-display: swap;
+}
+
+:root{
+  --accent-rgb: 232, 183, 58;
+  --accent: #e8b73a; --accent-light: #f7d97a; --accent-deep: #b8860b;
+  --emerald: #10b981; --emerald-lt: #34d399;
+  --violet: #a78bfa; --violet-lt: #c4b5fd;
+  --rose: #fb7185; --amber: #f59e0b; --amber-lt: #fbbf24; --sky: #38bdf8;
+  --r-sm: 12px; --r-md: 18px; --r-lg: 24px; --r-full: 999px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --font-title: 'Vazirmatn', serif;
+  --font-body: 'Vazirmatn', system-ui, sans-serif;
+  --font-scale: 1;
+
+  --bg-deep: #050810; --bg-mid: #0a0f1d; --bg-soft: #0f1626;
+  --text: #eef4fb; --text-soft: #c5d0e0; --muted: #8795ad; --muted-soft: #5f6e88;
+  --surface: rgba(255,255,255,0.035); --surface-hover: rgba(255,255,255,0.055);
+  --surface-strong: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(var(--accent-rgb), 0.45);
+  --border-gold: rgba(var(--accent-rgb), 0.22);
+  --shadow-md: 0 10px 40px rgba(0,0,0,0.35);
+  --glow-gold: 0 0 30px rgba(var(--accent-rgb), 0.25);
+}
+
+body[data-theme="midnight"]{ --bg-deep:#060a20; --bg-mid:#0c1230; --bg-soft:#141c40; --text:#e6ecff; --text-soft:#b8c5e5; --muted:#7a89b8; --muted-soft:#566289; --surface:rgba(255,255,255,0.04); --surface-hover:rgba(255,255,255,0.06); --surface-strong:rgba(255,255,255,0.09); --border:rgba(180,200,255,0.08); }
+body[data-theme="ocean"]{ --bg-deep:#02141c; --bg-mid:#042230; --bg-soft:#063044; --text:#d8f0f8; --text-soft:#a0c8d8; --muted:#6a96a8; --muted-soft:#4a7183; --surface:rgba(120,220,240,0.05); --surface-hover:rgba(120,220,240,0.08); --surface-strong:rgba(120,220,240,0.1); --border:rgba(140,220,240,0.1); }
+body[data-theme="forest"]{ --bg-deep:#041208; --bg-mid:#081f10; --bg-soft:#0e2a1a; --text:#e0f2e4; --text-soft:#b0d4b8; --muted:#7aa08a; --muted-soft:#527a62; --surface:rgba(150,240,180,0.04); --surface-hover:rgba(150,240,180,0.07); --surface-strong:rgba(150,240,180,0.09); --border:rgba(150,220,180,0.1); }
+body[data-theme="violet"]{ --bg-deep:#100620; --bg-mid:#1c0a30; --bg-soft:#281040; --text:#ede4fb; --text-soft:#c8b8e0; --muted:#9a84b8; --muted-soft:#6f5a89; --surface:rgba(200,150,240,0.05); --surface-hover:rgba(200,150,240,0.08); --surface-strong:rgba(200,150,240,0.1); --border:rgba(200,170,240,0.1); }
+body[data-theme="crimson"]{ --bg-deep:#180408; --bg-mid:#260a12; --bg-soft:#38101c; --text:#f5e0e4; --text-soft:#d4a8b0; --muted:#a87a84; --muted-soft:#7a5260; --surface:rgba(240,150,170,0.05); --surface-hover:rgba(240,150,170,0.08); --surface-strong:rgba(240,150,170,0.1); --border:rgba(240,180,200,0.1); }
+body[data-theme="light"]{ --bg-deep:#f4efe2; --bg-mid:#faf6ec; --bg-soft:#ffffff; --text:#1a1a1a; --text-soft:#333; --muted:#666; --muted-soft:#999; --surface:rgba(0,0,0,0.035); --surface-hover:rgba(0,0,0,0.06); --surface-strong:rgba(0,0,0,0.09); --border:rgba(0,0,0,0.1); --shadow-md: 0 10px 40px rgba(120,100,40,0.15); }
+body[data-theme="sepia"]{ --bg-deep:#ede4cc; --bg-mid:#f5eed6; --bg-soft:#fbf6e3; --text:#3a2f1c; --text-soft:#5a4a30; --muted:#8a7a5a; --muted-soft:#a89a7a; --surface:rgba(120,90,30,0.06); --surface-hover:rgba(120,90,30,0.1); --surface-strong:rgba(120,90,30,0.13); --border:rgba(120,90,30,0.15); --shadow-md: 0 10px 40px rgba(120,90,30,0.15); }
+
+html{ font-size: calc(16px * var(--font-scale, 1)); scroll-behavior: smooth; }
+*{ box-sizing: border-box; margin: 0; padding: 0; }
+
+body{
+  font-family: var(--font-body);
+  min-height: 100vh; background: var(--bg-deep); color: var(--text);
+  padding: 40px 20px 80px; display: flex; justify-content: center;
+  align-items: flex-start; overflow-x: hidden; position: relative;
+  line-height: 1.6; -webkit-font-smoothing: antialiased;
+  transition: background 0.4s, color 0.4s;
+}
+
+.profile-name, .page-title h1, .section-title, .item-title, .chart-header h3,
+.modal-head h2, .setting-group-title, .hadith-source, .free-title,
+.archive-header .info .title, .free-stat-label, .target-label{
+  font-family: var(--font-title);
+}
+
+body::before, body::after{
+  content: ""; position: fixed; border-radius: 50%;
+  filter: blur(120px); pointer-events: none; z-index: 0;
+  will-change: transform; opacity: 0.35;
+}
+body::before{ width: 600px; height: 600px; background: radial-gradient(circle, var(--accent) 0%, transparent 70%); top: -180px; right: -180px; animation: aurora1 22s ease-in-out infinite; }
+body::after{ width: 700px; height: 700px; background: radial-gradient(circle, var(--emerald) 0%, transparent 70%); bottom: -280px; left: -200px; animation: aurora2 28s ease-in-out infinite; }
+body.no-aurora::before, body.no-aurora::after{ display: none; }
+@keyframes aurora1{ 0%,100%{ transform: translate(0,0) scale(1); } 50%{ transform: translate(-80px,60px) scale(1.15); } }
+@keyframes aurora2{ 0%,100%{ transform: translate(0,0) scale(1); } 50%{ transform: translate(90px,-70px) scale(1.12); } }
+
+.noise{ position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E"); opacity: 0.035; pointer-events: none; z-index: 1; mix-blend-mode: overlay; }
+body.no-noise .noise{ display: none; }
+
+.wrap{ position: relative; z-index: 2; width: 100%; max-width: 880px; animation: pageIn 0.8s var(--ease-out) both; }
+@keyframes pageIn{ from{ opacity: 0; transform: translateY(20px); } to{ opacity: 1; transform: translateY(0); } }
+
+header{ text-align: center; margin-bottom: 32px; position: relative; }
+.settings-btn{ position: absolute; top: 0; left: 0; width: 42px; height: 42px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); color: var(--text-soft); font-size: 1.15rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s var(--ease-out); backdrop-filter: blur(16px); z-index: 5; }
+.settings-btn:hover{ background: var(--surface-hover); border-color: var(--border-hover); color: var(--accent-light); transform: rotate(60deg) scale(1.05); box-shadow: var(--glow-gold); }
+.ornament{ display: inline-flex; align-items: center; gap: 12px; font-size: 0.72rem; letter-spacing: 4px; font-weight: 600; color: var(--accent-light); text-transform: uppercase; margin-bottom: 20px; opacity: 0.85; }
+.ornament::before, .ornament::after{ content: ""; width: 48px; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+.profile-name{ font-size: clamp(1.9rem, 4.5vw, 2.6rem); font-weight: 900; line-height: 1.15; letter-spacing: -0.5px; background: linear-gradient(135deg, #ffffff 0%, var(--accent-light) 45%, var(--accent) 70%, #ffffff 100%); background-size: 200% 200%; -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; margin-bottom: 10px; animation: nameShine 8s ease infinite; }
+body.theme-is-light .profile-name{ background: linear-gradient(135deg, #1a1a1a 0%, var(--accent-deep) 45%, var(--accent) 70%, #1a1a1a 100%); background-size: 200% 200%; -webkit-background-clip: text; background-clip: text; }
+@keyframes nameShine{ 0%,100%{ background-position: 0% 50%; } 50%{ background-position: 100% 50%; } }
+.profile-role{ display: inline-flex; align-items: center; gap: 8px; font-size: 0.88rem; color: var(--muted); font-weight: 500; padding: 6px 16px; border-radius: var(--r-full); background: var(--surface); border: 1px solid var(--border); }
+.profile-role .dot{ width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 10px var(--emerald), 0 0 20px var(--emerald); animation: pulse 2.2s ease-in-out infinite; }
+@keyframes pulse{ 0%,100%{ transform: scale(1); opacity: 1; } 50%{ transform: scale(1.35); opacity: 0.7; } }
+
+.hadith-card{ position: relative; margin: 8px 0 28px; padding: 32px 28px 28px; background: linear-gradient(135deg, rgba(var(--accent-rgb),0.10) 0%, rgba(var(--accent-rgb),0.03) 45%, rgba(16,185,129,0.06) 100%); border: 1px solid rgba(var(--accent-rgb),0.35); border-radius: var(--r-lg); text-align: center; overflow: hidden; box-shadow: 0 12px 44px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06); backdrop-filter: blur(22px); }
+.hadith-card::before{ content: ""; position: absolute; top: -40%; left: 50%; transform: translateX(-50%); width: 90%; height: 160%; background: radial-gradient(ellipse at center, rgba(var(--accent-rgb),0.18), transparent 65%); pointer-events: none; }
+.hadith-card::after{ content: ""; position: absolute; top: 0; left: 12%; right: 12%; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+.hadith-corner{ position: absolute; width: 22px; height: 22px; border: 2px solid rgba(var(--accent-rgb),0.5); pointer-events: none; }
+.hadith-corner.tl{ top: 10px; left: 10px; border-right: none; border-bottom: none; border-top-left-radius: 8px; }
+.hadith-corner.tr{ top: 10px; right: 10px; border-left: none; border-bottom: none; border-top-right-radius: 8px; }
+.hadith-corner.bl{ bottom: 10px; left: 10px; border-right: none; border-top: none; border-bottom-left-radius: 8px; }
+.hadith-corner.br{ bottom: 10px; right: 10px; border-left: none; border-top: none; border-bottom-right-radius: 8px; }
+.hadith-source{ display: inline-flex; align-items: center; gap: 12px; font-size: 0.78rem; color: var(--accent-light); font-weight: 700; letter-spacing: 0.6px; margin-bottom: 18px; position: relative; z-index: 1; }
+body.theme-is-light .hadith-source{ color: var(--accent-deep); }
+.hadith-source .hadith-line{ display: inline-block; width: 34px; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+.hadith-arabic{ font-family: 'Amiri', serif; font-size: clamp(1.35rem, 3.4vw, 1.8rem); font-weight: 700; color: var(--accent-light); line-height: 1.9; margin-bottom: 16px; text-shadow: 0 2px 24px rgba(var(--accent-rgb),0.35); position: relative; z-index: 1; }
+body.theme-is-light .hadith-arabic{ color: var(--accent-deep); text-shadow: none; }
+.hadith-translation{ font-family: 'Vazirmatn', serif; font-size: 0.95rem; color: var(--text-soft); font-weight: 500; line-height: 1.75; position: relative; z-index: 1; max-width: 500px; margin: 0 auto; }
+.hadith-translation::before, .hadith-translation::after{ content: "❝"; color: var(--accent); opacity: 0.6; font-size: 1.1rem; margin: 0 6px; vertical-align: middle; }
+.hadith-translation::after{ content: "❞"; }
+
+.datetime-bar{ margin-top: 28px; display: grid; grid-template-columns: auto 1fr; gap: 20px; padding: 22px 26px; background: linear-gradient(135deg, rgba(var(--accent-rgb),0.05), rgba(16,185,129,0.04)); border: 1px solid var(--border); border-radius: var(--r-lg); backdrop-filter: blur(24px) saturate(160%); box-shadow: var(--shadow-md); align-items: center; }
+.clock-block{ display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 0 24px 0 0; border-left: 1px solid var(--border); }
+.clock-label{ font-size: 0.7rem; color: var(--muted-soft); letter-spacing: 2px; font-weight: 600; }
+.clock{ font-size: clamp(1.9rem, 4.5vw, 2.5rem); font-weight: 800; letter-spacing: 2px; line-height: 1; font-variant-numeric: tabular-nums; direction: ltr; background: linear-gradient(180deg, var(--text) 0%, var(--accent-light) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.dates-block{ display: flex; flex-direction: column; gap: 10px; }
+.date-row{ display: flex; align-items: center; gap: 10px; font-size: 0.88rem; }
+.date-icon{ display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 9px; background: var(--surface); border: 1px solid var(--border); font-size: 0.85rem; flex-shrink: 0; }
+.date-label{ color: var(--muted); font-weight: 500; min-width: 46px; }
+.date-value{ color: var(--text); font-weight: 700; }
+
+.page-title{ text-align: center; margin: 34px 0 22px; }
+.page-title h1{ font-size: clamp(1.15rem, 2.6vw, 1.4rem); font-weight: 800; color: var(--text); margin-bottom: 12px; }
+.target-row{ display: inline-flex; align-items: center; gap: 10px; padding: 8px 18px; background: linear-gradient(135deg, rgba(var(--accent-rgb),0.08), rgba(16,185,129,0.05)); border: 1px solid var(--border-gold); border-radius: var(--r-full); flex-wrap: wrap; justify-content: center; }
+.target-label{ font-size: 0.82rem; color: var(--text-soft); font-weight: 600; }
+.target-input{ width: 62px; padding: 4px 8px; background: rgba(0,0,0,0.25); border: 1.5px solid rgba(var(--accent-rgb),0.35); border-radius: var(--r-full); color: var(--accent-light); font-family: inherit; font-size: 1rem; font-weight: 800; text-align: center; font-variant-numeric: tabular-nums; outline: none; direction: ltr; transition: 0.25s; }
+body.theme-is-light .target-input{ background: rgba(255,255,255,0.7); color: var(--accent-deep); }
+.target-input:focus{ border-color: var(--accent); box-shadow: 0 0 0 4px rgba(var(--accent-rgb),0.15); }
+.target-input::-webkit-outer-spin-button, .target-input::-webkit-inner-spin-button{ -webkit-appearance: none; margin: 0; }
+.target-unit{ font-size: 0.82rem; color: var(--accent-light); font-weight: 700; }
+body.theme-is-light .target-unit{ color: var(--accent-deep); }
+
+.summary{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 22px; }
+.summary-card{ position: relative; padding: 20px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); text-align: center; backdrop-filter: blur(20px); transition: 0.35s var(--ease-out); }
+.summary-card:hover{ background: var(--surface-hover); transform: translateY(-4px); border-color: var(--border-hover); box-shadow: var(--glow-gold); }
+.summary-card .icon{ font-size: 1.5rem; margin-bottom: 10px; display: inline-block; }
+.summary-card .value{ font-size: 1.9rem; font-weight: 900; line-height: 1; background: linear-gradient(135deg, var(--accent-light), var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; margin-bottom: 6px; font-variant-numeric: tabular-nums; }
+.summary-card .label{ font-size: 0.72rem; color: var(--muted); font-weight: 500; }
+
+.progress-card{ position: relative; padding: 22px 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); backdrop-filter: blur(20px); margin-bottom: 24px; }
+.progress-head{ display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; flex-wrap: wrap; gap: 8px; }
+.progress-head .title{ font-size: 0.9rem; font-weight: 600; color: var(--text-soft); display: flex; align-items: center; gap: 8px; }
+.progress-head .percent{ font-size: 1.5rem; font-weight: 900; font-variant-numeric: tabular-nums; background: linear-gradient(135deg, var(--accent-light), var(--emerald-lt)); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; line-height: 1; }
+.progress-head .hours-live{ font-size: 0.8rem; color: var(--muted); font-weight: 600; font-variant-numeric: tabular-nums; }
+.progress-head .hours-live strong{ color: var(--accent-light); font-weight: 900; font-size: 1rem; }
+body.theme-is-light .progress-head .hours-live strong{ color: var(--accent-deep); }
+.progress-head .hours-live.over strong{ color: var(--emerald-lt); }
+.bar{ position: relative; height: 10px; background: rgba(255,255,255,0.05); border-radius: var(--r-full); overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.4); }
+body.theme-is-light .bar{ background: rgba(0,0,0,0.08); }
+.bar-fill{ position: relative; height: 100%; width: 0%; border-radius: var(--r-full); background: linear-gradient(90deg, var(--emerald) 0%, var(--accent) 100%); transition: width 0.7s var(--ease-out); box-shadow: 0 0 20px rgba(var(--accent-rgb),0.5); }
+.bar-fill::after{ content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent); animation: shimmer 2.6s linear infinite; }
+@keyframes shimmer{ 0%{ transform: translateX(-100%); } 100%{ transform: translateX(100%); } }
+
+.tabs{ display: flex; gap: 6px; padding: 6px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: var(--r-full); margin-bottom: 26px; max-width: 480px; margin-left: auto; margin-right: auto; backdrop-filter: blur(16px); }
+body.theme-is-light .tabs{ background: rgba(255,255,255,0.6); }
+.tab{ flex: 1; padding: 11px 12px; background: transparent; border: none; color: var(--muted); font-family: inherit; font-size: 0.82rem; font-weight: 700; border-radius: var(--r-full); cursor: pointer; transition: 0.35s var(--ease-out); white-space: nowrap; }
+.tab:hover:not(.active){ color: var(--text-soft); }
+.tab.active{ background: linear-gradient(135deg, rgba(var(--accent-rgb),0.18), rgba(16,185,129,0.15)); color: var(--accent-light); box-shadow: 0 4px 16px rgba(var(--accent-rgb),0.2), inset 0 0 0 1px rgba(var(--accent-rgb),0.25); }
+body.theme-is-light .tab.active{ color: var(--accent-deep); }
+
+.view{ animation: fadeUp 0.45s var(--ease-out) both; }
+.view.hidden{ display: none; }
+@keyframes fadeUp{ from{ opacity: 0; transform: translateY(12px); } to{ opacity: 1; transform: translateY(0); } }
+
+section{ margin-bottom: 26px; }
+.section-title{ display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding: 0 4px; font-size: 0.98rem; font-weight: 700; color: var(--text); }
+.section-title .ico{ font-size: 1.1rem; }
+.section-title .badge{ margin-right: auto; padding: 3px 12px; background: linear-gradient(135deg, rgba(var(--accent-rgb),0.12), rgba(var(--accent-rgb),0.05)); border: 1px solid var(--border-gold); color: var(--accent-light); border-radius: var(--r-full); font-size: 0.7rem; font-weight: 700; }
+body.theme-is-light .section-title .badge{ color: var(--accent-deep); }
+.section-title.gold .ico{ filter: drop-shadow(0 0 8px var(--accent)); }
+.section-title.emerald .ico{ filter: drop-shadow(0 0 8px var(--emerald)); }
+.section-title.violet .ico{ filter: drop-shadow(0 0 8px var(--violet)); }
+.section-title.amber .ico{ filter: drop-shadow(0 0 8px var(--amber)); }
+.section-title.rose .ico{ filter: drop-shadow(0 0 8px var(--rose)); }
+
+.items-list{ position: relative; }
+
+.item{ display: flex; align-items: center; gap: 12px; padding: 15px 16px 15px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); margin-bottom: 10px; cursor: pointer; transition: 0.3s var(--ease-out); user-select: none; position: relative; backdrop-filter: blur(16px); }
+.item::before{ content: ""; position: absolute; top: 0; right: 0; width: 3px; height: 100%; background: linear-gradient(180deg, var(--accent), var(--emerald)); opacity: 0; transition: 0.3s; border-radius: 0 var(--r-md) var(--r-md) 0; }
+.item:hover:not(.disabled){ background: var(--surface-hover); border-color: var(--border-hover); transform: translateX(-4px); box-shadow: -4px 0 24px rgba(var(--accent-rgb),0.15); }
+.item:hover:not(.disabled)::before{ opacity: 1; }
+.item.done{ background: linear-gradient(90deg, rgba(16,185,129,0.08), transparent); border-color: rgba(16,185,129,0.4); }
+.item.done::before{ background: var(--emerald); opacity: 1; }
+.item.done .item-title{ color: var(--muted); text-decoration: line-through; text-decoration-color: rgba(var(--accent-rgb),0.6); text-decoration-thickness: 1.5px; }
+.item.disabled{ opacity: 0.38; filter: grayscale(0.7); cursor: default; }
+.item.disabled:hover{ transform: none; box-shadow: none; }
+.item.disabled .item-title, .item.disabled .item-sub{ color: var(--muted-soft); }
+
+.item[draggable="true"]{ cursor: grab; }
+.item.dragging{ opacity: 0.35; transform: scale(0.98); cursor: grabbing; }
+.item.drag-over-top{ border-top: 3px solid var(--accent) !important; }
+.item.drag-over-bottom{ border-bottom: 3px solid var(--accent) !important; }
+.drag-handle{ display: flex; align-items: center; justify-content: center; width: 18px; color: var(--muted-soft); font-size: 1rem; cursor: grab; opacity: 0.4; flex-shrink: 0; transition: 0.2s; }
+.item:hover .drag-handle{ opacity: 0.9; color: var(--accent); }
+.drag-handle:active{ cursor: grabbing; }
+
+.item[data-custom="true"]::after{ content: "دلخواه"; position: absolute; top: 4px; left: 4px; font-size: 0.55rem; padding: 1px 6px; background: rgba(var(--accent-rgb),0.15); border: 1px solid var(--border-gold); color: var(--accent-light); border-radius: var(--r-full); font-weight: 700; letter-spacing: 0.5px; pointer-events: none; }
+body.theme-is-light .item[data-custom="true"]::after{ color: var(--accent-deep); }
+
+.check{ width: 26px; height: 26px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: 0.3s var(--ease-spring); background: rgba(0,0,0,0.25); }
+body.theme-is-light .check{ border-color: rgba(0,0,0,0.2); background: #fff; }
+.check svg{ width: 14px; height: 14px; stroke: #0a0f1d; stroke-width: 3.5; fill: none; stroke-dasharray: 30; stroke-dashoffset: 30; transition: stroke-dashoffset 0.4s var(--ease-out); }
+.item.done .check{ background: linear-gradient(135deg, var(--emerald), var(--emerald-lt)); border-color: var(--emerald-lt); box-shadow: 0 0 0 4px rgba(16,185,129,0.15), 0 0 16px rgba(16,185,129,0.4); transform: scale(1.05); }
+.item.done .check svg{ stroke-dashoffset: 0; }
+.item .emoji{ display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 13px; background: linear-gradient(135deg, rgba(var(--accent-rgb),0.12), rgba(var(--accent-rgb),0.03)); border: 1px solid var(--border-gold); font-size: 1.25rem; flex-shrink: 0; transition: 0.3s; }
+.item:hover:not(.disabled) .emoji{ transform: scale(1.08) rotate(-4deg); box-shadow: 0 0 20px rgba(var(--accent-rgb),0.25); }
+.item[data-id^="fq"] .emoji{ background: linear-gradient(135deg, rgba(245,158,11,0.18), rgba(245,158,11,0.03)); border-color: rgba(245,158,11,0.35); }
+.item[data-id^="us"] .emoji{ background: linear-gradient(135deg, rgba(56,189,248,0.18), rgba(56,189,248,0.03)); border-color: rgba(56,189,248,0.35); }
+.item[data-id^="ph"] .emoji{ background: linear-gradient(135deg, rgba(167,139,250,0.18), rgba(167,139,250,0.03)); border-color: rgba(167,139,250,0.35); }
+.item[data-id^="study"] .emoji{ background: linear-gradient(135deg, rgba(16,185,129,0.18), rgba(16,185,129,0.03)); border-color: rgba(16,185,129,0.35); }
+.item[data-id^="mobahase"] .emoji{ background: linear-gradient(135deg, rgba(251,113,133,0.18), rgba(251,113,133,0.03)); border-color: rgba(251,113,133,0.35); }
+.item[data-custom="true"] .emoji{ background: linear-gradient(135deg, rgba(232,183,58,0.22), rgba(232,183,58,0.06)); border-color: rgba(232,183,58,0.45); }
+
+.item-body{ flex: 1; min-width: 0; }
+.item-title{ font-weight: 700; font-size: 0.95rem; color: var(--text); margin-bottom: 3px; transition: 0.3s; }
+.item-sub{ font-size: 0.75rem; color: var(--muted); font-weight: 400; }
+.item-time{ padding: 5px 14px; background: rgba(var(--accent-rgb),0.09); border: 1px solid var(--border-gold); border-radius: var(--r-full); color: var(--accent-light); font-weight: 800; font-size: 0.82rem; white-space: nowrap; font-variant-numeric: tabular-nums; flex-shrink: 0; }
+body.theme-is-light .item-time{ color: var(--accent-deep); }
+
+.item-toggle{ width: 28px; height: 28px; border-radius: 9px; border: 1.5px solid rgba(var(--accent-rgb),0.3); background: rgba(var(--accent-rgb),0.08); color: var(--accent-light); cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.82rem; font-weight: 900; font-family: inherit; transition: 0.25s var(--ease-out); padding: 0; line-height: 1; }
+.item-toggle:hover{ background: rgba(var(--accent-rgb),0.15); border-color: var(--accent); transform: scale(1.1); }
+body.theme-is-light .item-toggle{ color: var(--accent-deep); }
+.item.disabled .item-toggle{ border-color: var(--border); background: var(--surface); color: var(--muted); }
+
+.item-delete{ width: 26px; height: 26px; border-radius: 8px; border: 1px solid rgba(251,113,133,0.3); background: rgba(251,113,133,0.08); color: var(--rose); cursor: pointer; font-size: 0.72rem; display: flex; align-items: center; justify-content: center; padding: 0; font-family: inherit; transition: 0.25s; flex-shrink: 0; }
+.item-delete:hover{ background: rgba(251,113,133,0.2); border-color: var(--rose); transform: scale(1.1); }
+
+.add-item-btn{ width: 100%; padding: 12px; margin-top: 6px; background: var(--surface); border: 1px dashed var(--border-gold); border-radius: var(--r-md); color: var(--accent-light); font-family: inherit; font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 6px; backdrop-filter: blur(16px); }
+.add-item-btn:hover{ background: rgba(var(--accent-rgb),0.08); border-color: var(--accent); border-style: solid; transform: translateY(-2px); }
+body.theme-is-light .add-item-btn{ color: var(--accent-deep); }
+
+.free-card{ display: flex; align-items: center; gap: 14px; padding: 15px 18px; background: linear-gradient(135deg, rgba(245,158,11,0.07), rgba(var(--accent-rgb),0.02)); border: 1px solid rgba(245,158,11,0.28); border-radius: var(--r-md); margin-bottom: 10px; position: relative; backdrop-filter: blur(16px); transition: 0.35s var(--ease-out); }
+.free-card::before{ content: ""; position: absolute; top: 0; right: 0; width: 3px; height: 100%; background: linear-gradient(180deg, var(--amber-lt), var(--amber)); opacity: 0.7; border-radius: 0 var(--r-md) var(--r-md) 0; }
+.free-card.has-value{ border-color: rgba(245,158,11,0.65); background: linear-gradient(135deg, rgba(245,158,11,0.13), rgba(var(--accent-rgb),0.05)); box-shadow: 0 0 26px rgba(245,158,11,0.18); }
+.free-icon{ display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 13px; background: linear-gradient(135deg, rgba(245,158,11,0.22), rgba(245,158,11,0.05)); border: 1px solid rgba(245,158,11,0.4); font-size: 1.25rem; flex-shrink: 0; transition: 0.35s var(--ease-out); }
+.free-card.has-value .free-icon{ box-shadow: 0 0 22px rgba(245,158,11,0.5); transform: scale(1.05); }
+.free-body{ flex: 1; min-width: 0; }
+.free-title{ font-weight: 700; font-size: 0.95rem; color: var(--text); margin-bottom: 3px; }
+.free-sub{ font-size: 0.75rem; color: var(--muted); font-weight: 400; }
+.free-input-wrap{ display: flex; align-items: center; gap: 8px; padding: 7px 14px; background: rgba(245,158,11,0.08); border: 1.5px solid rgba(245,158,11,0.3); border-radius: var(--r-full); transition: 0.3s var(--ease-out); flex-shrink: 0; }
+.free-input-wrap:focus-within{ border-color: var(--amber-lt); background: rgba(245,158,11,0.15); box-shadow: 0 0 0 4px rgba(245,158,11,0.12); }
+.free-input{ width: 62px; padding: 2px 0; background: transparent; border: none; color: var(--amber-lt); font-family: inherit; font-size: 1.1rem; font-weight: 800; text-align: center; font-variant-numeric: tabular-nums; outline: none; direction: ltr; }
+.free-input::-webkit-outer-spin-button, .free-input::-webkit-inner-spin-button{ -webkit-appearance: none; margin: 0; }
+.free-input::placeholder{ color: rgba(245,158,11,0.35); font-weight: 700; }
+.free-unit{ color: var(--amber-lt); font-size: 0.78rem; font-weight: 700; opacity: 0.85; }
+
+.free-blocks{ display: flex; flex-direction: column; gap: 8px; }
+.free-blocks:not(:empty){ margin-top: 12px; }
+.free-block{ display: grid; grid-template-columns: auto 1fr auto auto; gap: 10px; align-items: center; padding: 10px 12px; background: linear-gradient(135deg, rgba(245,158,11,0.055), rgba(var(--accent-rgb),0.015)); border: 1px solid rgba(245,158,11,0.22); border-radius: var(--r-md); position: relative; transition: 0.3s var(--ease-out); animation: blockIn 0.4s var(--ease-out) both; }
+@keyframes blockIn{ from{ opacity: 0; transform: translateY(-8px) scale(0.97); } to{ opacity: 1; transform: translateY(0) scale(1); } }
+.free-block::before{ content: ""; position: absolute; top: 0; right: 0; width: 3px; height: 100%; background: linear-gradient(180deg, var(--amber-lt), var(--amber)); opacity: 0.5; border-radius: 0 var(--r-md) var(--r-md) 0; }
+.free-block:focus-within{ border-color: rgba(245,158,11,0.55); box-shadow: 0 0 22px rgba(245,158,11,0.12); }
+.free-block:focus-within::before{ opacity: 1; }
+.free-block-number{ display: inline-flex; align-items: center; justify-content: center; min-width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, rgba(245,158,11,0.28), rgba(245,158,11,0.08)); border: 1px solid rgba(245,158,11,0.4); color: var(--amber-lt); font-weight: 900; font-size: 0.78rem; flex-shrink: 0; }
+.free-block-title{ flex: 1; min-width: 0; padding: 9px 12px; background: rgba(0,0,0,0.22); border: 1px solid rgba(245,158,11,0.2); border-radius: var(--r-sm); color: var(--text); font-family: var(--font-body); font-size: 0.85rem; outline: none; transition: 0.25s; width: 100%; }
+body.theme-is-light .free-block-title{ background: rgba(255,255,255,0.6); }
+.free-block-title:focus{ border-color: rgba(245,158,11,0.6); background: rgba(0,0,0,0.3); box-shadow: 0 0 0 3px rgba(245,158,11,0.1); }
+body.theme-is-light .free-block-title:focus{ background: #fff; }
+.free-block-title::placeholder{ color: var(--muted-soft); }
+.free-block-minutes{ width: 72px; padding: 9px 10px; background: rgba(245,158,11,0.08); border: 1.5px solid rgba(245,158,11,0.3); border-radius: var(--r-sm); color: var(--amber-lt); font-family: inherit; font-size: 0.92rem; font-weight: 800; text-align: center; font-variant-numeric: tabular-nums; outline: none; direction: ltr; transition: 0.25s; }
+.free-block-minutes::-webkit-outer-spin-button, .free-block-minutes::-webkit-inner-spin-button{ -webkit-appearance: none; margin: 0; }
+.free-block-minutes:focus{ border-color: var(--amber-lt); background: rgba(245,158,11,0.15); box-shadow: 0 0 0 3px rgba(245,158,11,0.12); }
+.free-block-unit{ font-size: 0.72rem; color: var(--amber-lt); font-weight: 700; white-space: nowrap; }
+.free-total{ margin-top: 14px; padding: 12px 18px; background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(var(--accent-rgb),0.04)); border: 1px solid rgba(245,158,11,0.35); border-radius: var(--r-full); text-align: center; font-size: 0.85rem; color: var(--text-soft); font-weight: 600; }
+.free-total strong{ color: var(--amber-lt); font-weight: 900; font-size: 1.05rem; margin: 0 3px; }
+
+.notes-card{ background: linear-gradient(135deg, rgba(56,189,248,0.06), rgba(var(--accent-rgb),0.02)); border: 1px solid rgba(56,189,248,0.25); border-radius: var(--r-md); padding: 16px 18px; position: relative; transition: 0.3s; }
+.notes-card::before{ content: ""; position: absolute; top: 0; right: 0; width: 3px; height: 100%; background: linear-gradient(180deg, var(--sky), #0ea5e9); opacity: 0.7; border-radius: 0 var(--r-md) var(--r-md) 0; }
+.notes-card:focus-within{ border-color: rgba(56,189,248,0.6); box-shadow: 0 0 26px rgba(56,189,248,0.15); }
+.notes-head{ display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 0.85rem; font-weight: 700; color: var(--sky); }
+.notes-head .notes-count{ margin-right: auto; font-size: 0.7rem; color: var(--muted); font-weight: 600; }
+.notes-textarea{ width: 100%; min-height: 100px; padding: 12px 14px; background: rgba(0,0,0,0.18); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--r-sm); color: var(--text); font-family: var(--font-body); font-size: 0.88rem; line-height: 1.8; resize: vertical; outline: none; transition: 0.3s; }
+body.theme-is-light .notes-textarea{ background: rgba(255,255,255,0.5); border-color: rgba(0,0,0,0.08); }
+.notes-textarea::placeholder{ color: var(--muted-soft); }
+.notes-textarea:focus{ background: rgba(0,0,0,0.25); border-color: rgba(56,189,248,0.4); }
+
+.actions{ display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
+.btn{ display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; background: var(--surface); border: 1px solid var(--border); color: var(--text-soft); font-family: inherit; font-size: 0.83rem; font-weight: 600; border-radius: var(--r-full); cursor: pointer; transition: 0.3s var(--ease-out); backdrop-filter: blur(16px); }
+.btn:hover{ background: var(--surface-hover); border-color: var(--border-hover); color: var(--accent-light); transform: translateY(-2px); box-shadow: var(--glow-gold); }
+.btn.primary{ background: linear-gradient(135deg, rgba(var(--accent-rgb),0.15), rgba(16,185,129,0.12)); border-color: var(--border-gold); color: var(--accent-light); }
+body.theme-is-light .btn.primary, body.theme-is-light .btn:hover{ color: var(--accent-deep); }
+.btn.danger{ border-color: rgba(251,113,133,0.3); color: var(--rose); }
+.btn.danger:hover{ background: rgba(251,113,133,0.1); border-color: rgba(251,113,133,0.6); }
+.btn.active{ background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(var(--accent-rgb),0.12)); border-color: rgba(16,185,129,0.4); color: var(--emerald-lt); }
+
+.search-box{ position: relative; margin-bottom: 16px; }
+.search-box input{ width: 100%; padding: 13px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-full); color: var(--text); font-family: inherit; font-size: 0.88rem; outline: none; transition: 0.3s; backdrop-filter: blur(16px); }
+.search-box input::placeholder{ color: var(--muted); font-weight: 500; }
+.search-box input:focus{ border-color: var(--border-hover); background: var(--surface-hover); box-shadow: 0 0 0 4px rgba(var(--accent-rgb),0.08); }
+.search-box .search-clear{ position: absolute; top: 50%; left: 12px; transform: translateY(-50%); width: 26px; height: 26px; border-radius: 50%; border: none; background: rgba(255,255,255,0.06); color: var(--muted); cursor: pointer; display: none; align-items: center; justify-content: center; font-size: 0.8rem; transition: 0.25s; font-family: inherit; }
+.search-box .search-clear:hover{ background: rgba(251,113,133,0.15); color: var(--rose); }
+.search-box.has-value .search-clear{ display: flex; }
+.search-info{ text-align: center; font-size: 0.75rem; color: var(--muted); margin-bottom: 14px; min-height: 1.2em; }
+.search-info strong{ color: var(--accent-light); font-weight: 800; }
+body.theme-is-light .search-info strong{ color: var(--accent-deep); }
+
+.stats-grid{ display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-bottom: 24px; }
+.stat-card{ position: relative; padding: 22px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); text-align: center; backdrop-filter: blur(20px); transition: 0.35s var(--ease-out); }
+.stat-card::before{ content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent); opacity: 0.7; border-radius: var(--r-md) var(--r-md) 0 0; }
+.stat-card:hover{ transform: translateY(-4px); border-color: var(--border-hover); box-shadow: var(--glow-gold); }
+.stat-icon{ font-size: 1.6rem; margin-bottom: 10px; display: inline-block; }
+.stat-value{ font-size: 2rem; font-weight: 900; line-height: 1; background: linear-gradient(135deg, var(--accent-light), var(--emerald-lt)); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; font-variant-numeric: tabular-nums; margin-bottom: 8px; }
+.stat-value small{ font-size: 0.85rem; font-weight: 700; -webkit-text-fill-color: var(--muted); color: var(--muted); margin-right: 3px; }
+.stat-label{ font-size: 0.74rem; color: var(--muted); font-weight: 500; }
+
+.chart-card{ background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 22px 22px 26px; margin-bottom: 22px; backdrop-filter: blur(20px); }
+.chart-header{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; flex-wrap: wrap; gap: 10px; }
+.chart-header h3{ font-size: 0.95rem; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.range-btns{ display: flex; gap: 4px; padding: 3px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: var(--r-full); }
+body.theme-is-light .range-btns{ background: rgba(255,255,255,0.5); }
+.range-btn{ padding: 6px 14px; background: transparent; border: none; color: var(--muted); font-family: inherit; font-size: 0.72rem; font-weight: 700; border-radius: var(--r-full); cursor: pointer; transition: 0.25s; }
+.range-btn.active{ background: linear-gradient(135deg, rgba(var(--accent-rgb),0.22), rgba(16,185,129,0.15)); color: var(--accent-light); }
+body.theme-is-light .range-btn.active{ color: var(--accent-deep); }
+
+.weekly-chart{ display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; height: 190px; align-items: end; padding-bottom: 34px; position: relative; }
+.weekly-chart::before{ content: ""; position: absolute; left: 0; right: 0; bottom: 34px; height: 1px; background: rgba(255,255,255,0.06); }
+body.theme-is-light .weekly-chart::before{ background: rgba(0,0,0,0.1); }
+.day-col{ display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; position: relative; }
+.day-bar{ width: 100%; max-width: 44px; background: linear-gradient(180deg, var(--accent) 0%, var(--emerald) 100%); border-radius: 10px 10px 4px 4px; min-height: 4px; transition: height 0.8s var(--ease-out); position: relative; box-shadow: 0 4px 20px rgba(var(--accent-rgb),0.25); }
+.day-bar.empty{ background: rgba(255,255,255,0.05); box-shadow: none; }
+body.theme-is-light .day-bar.empty{ background: rgba(0,0,0,0.06); }
+.day-bar .day-value{ position: absolute; top: -22px; left: 50%; transform: translateX(-50%); font-size: 0.68rem; font-weight: 800; color: var(--accent-light); white-space: nowrap; font-variant-numeric: tabular-nums; }
+body.theme-is-light .day-bar .day-value{ color: var(--accent-deep); }
+.day-label{ position: absolute; bottom: -28px; font-size: 0.73rem; color: var(--muted); font-weight: 600; }
+.day-label.today{ color: var(--accent-light); font-weight: 900; }
+body.theme-is-light .day-label.today{ color: var(--accent-deep); }
+
+.heatmap{ display: grid; grid-template-columns: repeat(10, 1fr); gap: 7px; }
+.heat-cell{ aspect-ratio: 1; border-radius: 8px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.03); cursor: pointer; transition: 0.25s var(--ease-spring); position: relative; }
+body.theme-is-light .heat-cell{ background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.05); }
+.heat-cell:hover{ transform: scale(1.18); border-color: var(--accent); z-index: 2; box-shadow: 0 0 16px rgba(var(--accent-rgb),0.4); }
+.heat-cell.level-1{ background: rgba(16,185,129,0.22); }
+.heat-cell.level-2{ background: rgba(16,185,129,0.5); }
+.heat-cell.level-3{ background: linear-gradient(135deg, rgba(var(--accent-rgb),0.75), rgba(16,185,129,0.55)); }
+.heat-cell.level-4{ background: linear-gradient(135deg, var(--accent), var(--emerald)); box-shadow: 0 0 12px rgba(var(--accent-rgb),0.5); }
+.heat-cell.today{ outline: 2px solid var(--accent-light); outline-offset: 2px; }
+.heat-legend{ display: flex; align-items: center; gap: 6px; justify-content: flex-end; margin-top: 16px; font-size: 0.7rem; color: var(--muted); }
+.heat-legend .legend-box{ width: 13px; height: 13px; border-radius: 4px; display: inline-block; border: 1px solid rgba(255,255,255,0.06); }
+
+.free-stats-grid{ display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-bottom: 20px; }
+.free-stat{ padding: 16px 12px; background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(var(--accent-rgb),0.02)); border: 1px solid rgba(245,158,11,0.25); border-radius: var(--r-md); text-align: center; transition: 0.3s; }
+.free-stat:hover{ transform: translateY(-3px); border-color: rgba(245,158,11,0.5); box-shadow: 0 4px 22px rgba(245,158,11,0.15); }
+.free-stat-value{ font-size: 1.5rem; font-weight: 900; line-height: 1; background: linear-gradient(135deg, var(--amber-lt), var(--amber)); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; font-variant-numeric: tabular-nums; margin-bottom: 6px; min-height: 1.5rem; }
+.free-stat-value.small{ font-size: 0.95rem; padding: 4px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.free-stat-label{ font-size: 0.7rem; color: var(--muted); font-weight: 500; }
+
+.free-weekly-chart{ display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; height: 130px; align-items: end; padding-bottom: 26px; position: relative; margin-top: 10px; }
+.free-weekly-chart::before{ content: ""; position: absolute; left: 0; right: 0; bottom: 26px; height: 1px; background: rgba(245,158,11,0.15); }
+.free-day-col{ display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; position: relative; }
+.free-day-bar{ width: 100%; max-width: 40px; background: linear-gradient(180deg, var(--amber-lt) 0%, var(--amber) 100%); border-radius: 8px 8px 4px 4px; min-height: 4px; transition: height 0.8s var(--ease-out); position: relative; box-shadow: 0 4px 14px rgba(245,158,11,0.3); }
+.free-day-bar.empty{ background: rgba(245,158,11,0.12); box-shadow: none; }
+.free-day-bar .free-day-value{ position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-size: 0.6rem; font-weight: 800; color: var(--amber-lt); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.free-day-label{ position: absolute; bottom: -22px; font-size: 0.68rem; color: var(--muted); font-weight: 600; }
+.free-day-label.today{ color: var(--amber-lt); font-weight: 900; }
+
+.archive-day{ background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); margin-bottom: 10px; overflow: hidden; transition: 0.3s var(--ease-out); backdrop-filter: blur(16px); }
+.archive-day:hover{ border-color: var(--border-hover); }
+.archive-day.open{ border-color: var(--border-gold); box-shadow: 0 0 24px rgba(var(--accent-rgb),0.12); }
+.archive-header{ display: flex; align-items: center; gap: 14px; padding: 14px 18px; cursor: pointer; user-select: none; }
+.archive-header .date-badge{ display: flex; flex-direction: column; align-items: center; min-width: 56px; padding: 7px 10px; background: linear-gradient(135deg, rgba(var(--accent-rgb),0.14), rgba(var(--accent-rgb),0.04)); border: 1px solid var(--border-gold); border-radius: 13px; flex-shrink: 0; }
+.archive-header .d-num{ font-size: 1.2rem; font-weight: 900; color: var(--accent-light); line-height: 1; font-variant-numeric: tabular-nums; }
+body.theme-is-light .archive-header .d-num{ color: var(--accent-deep); }
+.archive-header .d-mon{ font-size: 0.62rem; color: var(--muted); margin-top: 3px; }
+.archive-header .info{ flex: 1; min-width: 0; }
+.archive-header .info .title{ font-weight: 700; font-size: 0.88rem; margin-bottom: 4px; color: var(--text); }
+.archive-header .info .sub{ font-size: 0.72rem; color: var(--muted); }
+.archive-header .mini-bar{ width: 100%; height: 4px; background: rgba(255,255,255,0.05); border-radius: var(--r-full); margin-top: 8px; overflow: hidden; }
+body.theme-is-light .archive-header .mini-bar{ background: rgba(0,0,0,0.08); }
+.archive-header .mini-bar > div{ height: 100%; background: linear-gradient(90deg, var(--emerald), var(--accent)); border-radius: var(--r-full); transition: width 0.6s var(--ease-out); }
+.archive-header .percent-badge{ font-weight: 900; font-size: 1.05rem; color: var(--accent-light); font-variant-numeric: tabular-nums; flex-shrink: 0; }
+body.theme-is-light .archive-header .percent-badge{ color: var(--accent-deep); }
+.lock-badge{ display: inline-flex; align-items: center; gap: 4px; font-size: 0.62rem; color: var(--muted); background: var(--surface); border: 1px solid var(--border); padding: 2px 8px; border-radius: var(--r-full); margin-top: 6px; font-weight: 600; }
+.archive-details{ max-height: 0; overflow: hidden; transition: max-height 0.55s var(--ease-out); padding: 0 18px; }
+.archive-day.open .archive-details{ max-height: 3500px; padding: 14px 18px 18px; border-top: 1px solid var(--border); }
+.archive-item{ display: flex; align-items: center; gap: 10px; padding: 8px 0; font-size: 0.83rem; border-bottom: 1px solid rgba(255,255,255,0.035); border-radius: 8px; transition: 0.25s; }
+.archive-item:last-child{ border-bottom: none; }
+.archive-item.highlight{ background: linear-gradient(90deg, rgba(var(--accent-rgb),0.14), rgba(var(--accent-rgb),0.02)); padding-left: 10px; padding-right: 10px; margin-left: -10px; margin-right: -10px; }
+.archive-item.disabled-row{ opacity: 0.4; }
+.archive-item.disabled-row .a-name{ font-style: italic; }
+.archive-item .a-emoji{ width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.9rem; border-radius: 9px; background: rgba(var(--accent-rgb),0.08); border: 1px solid var(--border-gold); flex-shrink: 0; }
+.archive-item[data-kind="free"] .a-emoji{ background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.35); }
+.archive-item[data-kind="custom"] .a-emoji{ background: rgba(232,183,58,0.15); border-color: rgba(232,183,58,0.4); }
+.archive-item .a-name{ flex: 1; color: var(--text-soft); }
+.archive-item.done .a-name{ color: var(--muted); }
+.archive-item .a-time{ font-size: 0.68rem; color: var(--accent-light); background: rgba(var(--accent-rgb),0.08); padding: 2px 9px; border-radius: var(--r-full); border: 1px solid var(--border-gold); flex-shrink: 0; }
+body.theme-is-light .archive-item .a-time{ color: var(--accent-deep); }
+.archive-item[data-kind="free"] .a-time{ color: var(--amber-lt); background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.35); }
+.archive-item .a-status{ width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; flex-shrink: 0; border: 1.5px solid rgba(255,255,255,0.15); color: transparent; transition: 0.25s; }
+body.theme-is-light .archive-item .a-status{ border-color: rgba(0,0,0,0.15); }
+.archive-item.done .a-status{ background: linear-gradient(135deg, var(--emerald), var(--emerald-lt)); border-color: var(--emerald-lt); color: #0a0f1d; font-weight: 900; }
+.archive-item.disabled-row .a-status{ border-style: dashed; border-color: rgba(251,113,133,0.3); color: rgba(251,113,133,0.6); }
+.archive-note{ margin-top: 12px; padding: 12px 14px; background: rgba(56,189,248,0.06); border: 1px solid rgba(56,189,248,0.22); border-radius: var(--r-sm); font-size: 0.82rem; color: var(--text-soft); line-height: 1.8; white-space: pre-wrap; word-wrap: break-word; }
+.archive-note .note-label{ display: block; font-size: 0.68rem; color: var(--sky); font-weight: 700; margin-bottom: 6px; }
+.archive-empty{ text-align: center; padding: 50px 20px; color: var(--muted); font-size: 0.85rem; border: 1px dashed var(--border); border-radius: var(--r-md); }
+.archive-empty .e-icon{ font-size: 2.2rem; display: block; margin-bottom: 10px; opacity: 0.5; }
+
+.modal-overlay{ position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(12px); z-index: 999; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: 0.35s var(--ease-out); }
+.modal-overlay.show{ opacity: 1; pointer-events: auto; }
+.modal{ position: relative; width: 100%; max-width: 620px; max-height: 88vh; overflow-y: auto; padding: 28px 24px 24px; background: linear-gradient(180deg, var(--bg-soft) 0%, var(--bg-mid) 100%); border: 1px solid var(--border-gold); border-radius: var(--r-lg); box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05) inset; transform: translateY(30px) scale(0.96); transition: 0.4s var(--ease-spring); }
+body.theme-is-light .modal{ background: linear-gradient(180deg, #fff 0%, #faf6ec 100%); box-shadow: 0 30px 80px rgba(0,0,0,0.2); }
+.modal-overlay.show .modal{ transform: translateY(0) scale(1); }
+.modal::-webkit-scrollbar{ width: 8px; }
+.modal::-webkit-scrollbar-thumb{ background: rgba(var(--accent-rgb),0.3); border-radius: 4px; }
+.modal-head{ display: flex; align-items: center; gap: 12px; margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.modal-head h2{ font-size: 1.1rem; font-weight: 800; color: var(--text); flex: 1; display: flex; align-items: center; gap: 10px; }
+.modal-close{ width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface); color: var(--muted); font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s var(--ease-out); font-family: inherit; flex-shrink: 0; }
+.modal-close:hover{ background: rgba(251,113,133,0.1); border-color: rgba(251,113,133,0.5); color: var(--rose); transform: rotate(90deg); }
+
+.setting-group{ margin-bottom: 22px; padding: 16px 16px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); }
+.setting-group-title{ display: flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 800; color: var(--accent-light); margin-bottom: 14px; }
+body.theme-is-light .setting-group-title{ color: var(--accent-deep); }
+.setting-group-title .ico{ font-size: 1rem; }
+.setting-row{ display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px dashed rgba(255,255,255,0.05); }
+body.theme-is-light .setting-row{ border-bottom-color: rgba(0,0,0,0.07); }
+.setting-row:last-child{ border-bottom: none; }
+.setting-label{ flex: 1; font-size: 0.84rem; color: var(--text-soft); font-weight: 600; }
+.setting-label small{ display: block; font-size: 0.7rem; color: var(--muted); font-weight: 400; margin-top: 3px; }
+.setting-label-block{ display: block; font-size: 0.84rem; color: var(--text-soft); font-weight: 600; margin-top: 16px; margin-bottom: 4px; }
+.setting-label-block small{ display: block; font-size: 0.7rem; color: var(--muted); font-weight: 400; margin-top: 3px; }
+
+.toggle{ position: relative; width: 46px; height: 26px; flex-shrink: 0; cursor: pointer; }
+.toggle input{ opacity: 0; width: 0; height: 0; position: absolute; }
+.toggle-slider{ position: absolute; inset: 0; background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 999px; transition: 0.3s; }
+body.theme-is-light .toggle-slider{ background: rgba(0,0,0,0.08); }
+.toggle-slider::before{ content: ""; position: absolute; width: 18px; height: 18px; border-radius: 50%; background: var(--muted); top: 3px; right: 3px; transition: 0.3s var(--ease-spring); }
+.toggle input:checked + .toggle-slider{ background: linear-gradient(135deg, rgba(16,185,129,0.35), rgba(var(--accent-rgb),0.3)); border-color: rgba(16,185,129,0.5); }
+.toggle input:checked + .toggle-slider::before{ background: linear-gradient(135deg, var(--emerald-lt), var(--accent-light)); transform: translateX(-20px); box-shadow: 0 0 12px rgba(16,185,129,0.6); }
+
+.theme-grid{ display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 10px; margin-top: 6px; }
+.theme-btn{ padding: 8px; background: var(--surface); border: 2px solid transparent; border-radius: 12px; cursor: pointer; transition: 0.25s var(--ease-out); position: relative; overflow: hidden; text-align: center; font-family: inherit; }
+.theme-btn:hover{ transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+.theme-btn.active{ border-color: var(--accent); box-shadow: 0 0 0 3px rgba(var(--accent-rgb),0.15), 0 4px 20px rgba(var(--accent-rgb),0.2); }
+.theme-btn.active::after{ content: "✓"; position: absolute; top: 6px; right: 6px; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); color: #000; display: flex; align-items: center; justify-content: center; font-size: 0.68rem; font-weight: 900; }
+.theme-preview{ height: 36px; border-radius: 8px; margin-bottom: 6px; display: flex; gap: 3px; padding: 4px; border: 1px solid rgba(255,255,255,0.08); }
+.theme-color{ flex: 1; border-radius: 4px; }
+.theme-name{ font-size: 0.68rem; font-weight: 700; color: var(--text-soft); }
+
+.accent-swatches{ display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.accent-swatch{ width: 32px; height: 32px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: 0.3s var(--ease-spring); position: relative; flex-shrink: 0; }
+.accent-swatch:hover{ transform: scale(1.15); }
+.accent-swatch.active{ border-color: #fff; box-shadow: 0 0 0 3px rgba(255,255,255,0.15), 0 0 20px currentColor; transform: scale(1.1); }
+.accent-swatch.active::after{ content: "✓"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 900; font-size: 0.9rem; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+.accent-custom{ width: 32px; height: 32px; border-radius: 50%; border: 2px dashed var(--border-hover); cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 0.9rem; position: relative; overflow: hidden; transition: 0.3s; }
+.accent-custom:hover{ border-color: var(--accent); color: var(--accent); }
+.accent-custom input{ position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+
+.segmented{ display: flex; gap: 3px; padding: 3px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: var(--r-full); flex-shrink: 0; }
+body.theme-is-light .segmented{ background: rgba(0,0,0,0.05); }
+.segmented button{ padding: 6px 10px; border: none; background: transparent; color: var(--muted); font-family: inherit; font-size: 0.72rem; font-weight: 700; border-radius: var(--r-full); cursor: pointer; transition: 0.25s; white-space: nowrap; min-width: 34px; }
+.segmented button.active{ background: linear-gradient(135deg, rgba(var(--accent-rgb),0.22), rgba(16,185,129,0.15)); color: var(--accent-light); }
+body.theme-is-light .segmented button.active{ color: var(--accent-deep); }
+
+.font-grid{ display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 8px; margin-top: 8px; }
+.font-btn{ padding: 12px 6px; background: rgba(0,0,0,0.25); border: 1px solid var(--border); border-radius: var(--r-sm); color: var(--text-soft); font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: 0.25s; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+body.theme-is-light .font-btn{ background: rgba(0,0,0,0.04); }
+.font-btn:hover{ border-color: var(--border-hover); color: var(--text); transform: translateY(-2px); }
+.font-btn.active{ background: linear-gradient(135deg, rgba(var(--accent-rgb),0.18), rgba(16,185,129,0.1)); border-color: var(--border-hover); color: var(--accent-light); box-shadow: 0 0 0 2px rgba(var(--accent-rgb),0.15); }
+body.theme-is-light .font-btn.active{ color: var(--accent-deep); }
+
+.time-input{ padding: 7px 12px; background: rgba(0,0,0,0.25); border: 1px solid var(--border); border-radius: var(--r-full); color: var(--text); font-family: inherit; font-size: 0.85rem; font-weight: 700; font-variant-numeric: tabular-nums; outline: none; transition: 0.3s; direction: ltr; text-align: center; cursor: pointer; flex-shrink: 0; min-width: 90px; }
+body.theme-is-light .time-input{ background: rgba(0,0,0,0.05); }
+
+.setting-textarea, .setting-input{ width: 100%; padding: 10px 14px; background: rgba(0,0,0,0.25); border: 1px solid var(--border); border-radius: var(--r-sm); color: var(--text); font-family: inherit; font-size: 0.8rem; outline: none; transition: 0.3s; line-height: 1.7; resize: vertical; }
+body.theme-is-light .setting-textarea, body.theme-is-light .setting-input{ background: rgba(0,0,0,0.04); }
+.setting-textarea{ min-height: 100px; font-family: 'Courier New', monospace; font-size: 0.75rem; }
+.setting-input:focus, .setting-textarea:focus{ border-color: var(--border-hover); box-shadow: 0 0 0 3px rgba(var(--accent-rgb),0.1); }
+
+.setting-hint{ font-size: 0.72rem; color: var(--muted); line-height: 1.7; margin-top: 8px; padding: 10px 12px; background: rgba(56,189,248,0.05); border-right: 3px solid var(--sky); border-radius: 6px; }
+.setting-hint code{ background: rgba(0,0,0,0.3); padding: 1px 6px; border-radius: 4px; font-size: 0.72rem; color: var(--accent-light); font-family: 'Courier New', monospace; direction: ltr; display: inline-block; }
+body.theme-is-light .setting-hint code{ background: rgba(0,0,0,0.06); color: var(--accent-deep); }
+.setting-actions{ display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+
+.sync-status{ display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: var(--r-full); font-size: 0.75rem; font-weight: 700; margin-top: 10px; justify-content: center; }
+.sync-status.idle{ background: rgba(255,255,255,0.04); color: var(--muted); border: 1px solid var(--border); }
+.sync-status.ok{ background: rgba(16,185,129,0.1); color: var(--emerald-lt); border: 1px solid rgba(16,185,129,0.3); }
+.sync-status.err{ background: rgba(251,113,133,0.1); color: var(--rose); border: 1px solid rgba(251,113,133,0.3); }
+.sync-status.loading{ background: rgba(var(--accent-rgb),0.1); color: var(--accent-light); border: 1px solid var(--border-gold); }
+
+.emoji-picker{ display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.emoji-option{ width: 36px; height: 36px; border-radius: 10px; background: rgba(0,0,0,0.2); border: 1.5px solid transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: 0.2s; font-family: inherit; padding: 0; }
+body.theme-is-light .emoji-option{ background: rgba(0,0,0,0.05); }
+.emoji-option:hover{ transform: scale(1.1); background: rgba(var(--accent-rgb),0.15); }
+.emoji-option.selected{ border-color: var(--accent); background: rgba(var(--accent-rgb),0.18); box-shadow: 0 0 12px rgba(var(--accent-rgb),0.3); }
+
+.toast{ position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(100px); padding: 13px 26px; background: linear-gradient(135deg, var(--emerald), var(--emerald-lt)); color: #050810; font-weight: 800; font-size: 0.85rem; border-radius: var(--r-full); box-shadow: 0 12px 40px rgba(16,185,129,0.4), 0 0 0 1px rgba(255,255,255,0.1) inset; opacity: 0; transition: 0.5s var(--ease-spring); z-index: 1100; pointer-events: none; max-width: 90%; text-align: center; font-family: inherit; }
+.toast.show{ opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast.gold{ background: linear-gradient(135deg, var(--accent), var(--accent-light)); box-shadow: 0 12px 40px rgba(var(--accent-rgb),0.4); }
+.toast.red{ background: linear-gradient(135deg, var(--rose), #fda4af); color: #fff; box-shadow: 0 12px 40px rgba(251,113,133,0.4); }
+
+.footer{ margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-size: 0.78rem; line-height: 2; }
+.footer .bismillah{ font-family: 'Noto Naskh Arabic', serif; font-size: 1.4rem; color: var(--accent-light); display: block; margin-bottom: 6px; }
+body.theme-is-light .footer .bismillah{ color: var(--accent-deep); }
+.footer .quote{ font-family: 'Amiri', serif; font-style: italic; font-size: 0.9rem; color: var(--text-soft); }
+.footer .star{ color: var(--accent); }
+
+@media (max-width: 640px){
+  body{ padding: 24px 14px 60px; }
+  .settings-btn{ width: 38px; height: 38px; font-size: 1.05rem; }
+  .summary{ grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .summary-card{ padding: 14px 8px; }
+  .summary-card .value{ font-size: 1.35rem; }
+  .summary-card .icon{ font-size: 1.2rem; margin-bottom: 6px; }
+  .summary-card .label{ font-size: 0.68rem; }
+  .datetime-bar{ grid-template-columns: 1fr; gap: 14px; padding: 18px; }
+  .clock-block{ padding: 0 0 14px; border-left: none; border-bottom: 1px solid var(--border); }
+  .item{ padding: 13px 12px 13px 10px; gap: 9px; }
+  .item .emoji{ width: 36px; height: 36px; font-size: 1.05rem; }
+  .item-time{ font-size: 0.7rem; padding: 4px 9px; }
+  .item-title{ font-size: 0.85rem; }
+  .item-sub{ font-size: 0.66rem; }
+  .item-toggle{ width: 26px; height: 26px; }
+  .item-delete{ width: 24px; height: 24px; }
+  .drag-handle{ width: 14px; font-size: 0.9rem; }
+  .free-card{ padding: 13px 14px; gap: 10px; flex-wrap: wrap; }
+  .free-icon{ width: 38px; height: 38px; font-size: 1.1rem; }
+  .free-input-wrap{ padding: 5px 11px; }
+  .free-input{ width: 54px; font-size: 1rem; }
+  .free-block{ grid-template-columns: auto 1fr auto; grid-template-rows: auto auto; padding: 10px; }
+  .free-block-number{ grid-row: 1 / 3; }
+  .free-block-title{ grid-column: 2 / 4; }
+  .free-block-minutes{ grid-column: 2 / 3; width: 100%; }
+  .free-block-unit{ grid-column: 3 / 4; }
+  .hadith-card{ padding: 24px 18px 22px; }
+  .hadith-arabic{ font-size: 1.15rem; }
+  .hadith-translation{ font-size: 0.85rem; }
+  .target-row{ padding: 6px 12px; }
+  .weekly-chart{ height: 150px; gap: 6px; }
+  .stat-value{ font-size: 1.6rem; }
+  .tab{ font-size: 0.75rem; padding: 10px 6px; }
+  .archive-header{ padding: 12px 14px; gap: 10px; }
+  .btn{ padding: 10px 16px; font-size: 0.78rem; }
+  .modal{ padding: 22px 16px 18px; max-height: 92vh; }
+  .setting-row{ flex-wrap: wrap; }
+  .font-grid{ grid-template-columns: repeat(2, 1fr); }
+  .theme-grid{ grid-template-columns: repeat(3, 1fr); }
+  .free-stats-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+
+@media print{
+  @page{ size: A4; margin: 16mm 14mm; }
+  body{ background: #fff !important; color: #1a1a1a !important; padding: 0 !important; display: block !important; }
+  body::before, body::after, .noise{ display: none !important; }
+  .wrap{ max-width: 100%; }
+  .tabs, .actions, .toast, .range-btns, .search-box, .search-info,
+  .lock-badge, .modal-overlay, .settings-btn, .item-toggle, .item-delete,
+  .drag-handle, .add-item-btn{ display: none !important; }
+  .view.hidden{ display: block !important; }
+  #view-stats, #view-archive{ display: none !important; }
+  .hadith-card, .datetime-bar, .summary-card, .progress-card,
+  .free-card, .notes-card, .free-block, .item{
+    background: #f7f5ee !important; border: 1px solid #c9b26a !important;
+    backdrop-filter: none !important; box-shadow: none !important; break-inside: avoid;
+  }
+  .hadith-card::before, .hadith-card::after, .hadith-corner{ display: none !important; }
+  .hadith-source, .hadith-arabic{ color: #8a6d1f !important; text-shadow: none !important; }
+  .hadith-translation{ color: #333 !important; }
+  .hadith-translation::before, .hadith-translation::after{ color: #8a6d1f !important; }
+  .profile-name{ background: none !important; -webkit-text-fill-color: #1a1a1a !important; color: #1a1a1a !important; animation: none !important; }
+  .clock, .summary-card .value, .stat-value, .progress-head .percent,
+  .progress-head .hours-live strong, .archive-header .percent-badge,
+  .archive-header .d-num, .day-bar .day-value, .day-label.today{
+    background: none !important; -webkit-text-fill-color: #8a6d1f !important; color: #8a6d1f !important;
+  }
+  .clock-label, .date-label, .page-title p{ color: #666 !important; }
+  .date-value{ color: #1a1a1a !important; }
+  .date-icon{ background: #f0ecdc !important; border-color: #d8cfa8 !important; }
+  .target-input{ background: #fff !important; border-color: #c9b26a !important; color: #8a6d1f !important; }
+  .item.done{ background: #eaf7f0 !important; border-color: #10b981 !important; }
+  .item.done .item-title{ text-decoration: line-through !important; color: #666 !important; }
+  .item.disabled{ opacity: 1 !important; filter: none !important; }
+  .item::before, .item[data-custom="true"]::after{ display: none !important; }
+  .check{ background: #fff !important; border-color: #b8a95f !important; }
+  .item.done .check{ background: #10b981 !important; border-color: #10b981 !important; box-shadow: none !important; }
+  .item.done .check svg{ stroke: #fff !important; stroke-dashoffset: 0 !important; }
+  .item:not(.done) .check svg{ stroke-dashoffset: 30 !important; }
+  .item .emoji{ background: #f5f2e8 !important; border-color: #d8cfa8 !important; }
+  .item-time, .free-total, .free-block-minutes{ background: #f2ecd8 !important; border-color: #c9b26a !important; color: #8a6d1f !important; }
+  .free-block-title, .notes-textarea{ background: #fff !important; border-color: #c9b26a !important; color: #1a1a1a !important; }
+  .free-block-number{ background: #f2ecd8 !important; border-color: #c9b26a !important; color: #8a6d1f !important; }
+  .free-total strong{ color: #8a6d1f !important; }
+  .bar{ background: #e5e0cf !important; }
+  .bar-fill{ background: linear-gradient(90deg, #10b981, #d4af37) !important; box-shadow: none !important; }
+  .bar-fill::after{ display: none !important; }
+  .footer{ color: #444 !important; border-top: 1px dashed #c9b26a; }
+  .footer .bismillah, .footer .star{ color: #8a6d1f !important; }
+}
+</style>
+</head>
+<body data-theme="dark">
+
+<div class="noise"></div>
+
+<div class="wrap">
+
+  <header>
+    <button class="settings-btn" id="settingsBtn" title="تنظیمات">⚙️</button>
+    <div class="ornament">سامانهٔ نظم تحصیلی</div>
+    <h1 class="profile-name">مهدی جلالی</h1>
+    <div class="profile-role"><span class="dot"></span> طلبهٔ پایه نهم</div>
+
+    <div class="datetime-bar">
+      <div class="clock-block">
+        <span class="clock-label">ساعت</span>
+        <div class="clock" id="liveClock">۰۰:۰۰:۰۰</div>
+      </div>
+      <div class="dates-block">
+        <div class="date-row"><span class="date-icon">☀️</span><span class="date-label">شمسی</span><span class="date-value" id="jalaliDate">—</span></div>
+        <div class="date-row"><span class="date-icon">🌙</span><span class="date-label">قمری</span><span class="date-value" id="hijriDate">—</span></div>
+        <div class="date-row"><span class="date-icon">🌍</span><span class="date-label">میلادی</span><span class="date-value" id="gregorianDate">—</span></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="hadith-card">
+    <span class="hadith-corner tl"></span><span class="hadith-corner tr"></span>
+    <span class="hadith-corner bl"></span><span class="hadith-corner br"></span>
+    <div class="hadith-source">
+      <span class="hadith-line"></span>
+      <span>امام على علیه‌السلام فرمود</span>
+      <span class="hadith-line"></span>
+    </div>
+    <div class="hadith-arabic">كُنْ مَشْغُولاً بِما أَنْتَ عَنْهُ مَسْؤُولٌ</div>
+    <div class="hadith-translation">به كارى مشغول باش كه از آن سؤال خواهى شد</div>
+  </div>
+
+  <div class="page-title">
+    <h1>لیست ساعت کاری روزانه</h1>
+    <div class="target-row">
+      <span class="target-label">مجموع ساعت کاری امروز:</span>
+      <input type="number" id="dailyTarget" class="target-input" min="1" max="24" step="0.5" value="8" inputmode="decimal" />
+      <span class="target-unit">ساعت</span>
+    </div>
+  </div>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="today">📋 امروز</button>
+    <button class="tab" data-tab="archive">📅 آرشیو</button>
+    <button class="tab" data-tab="stats">📊 آمار</button>
+  </nav>
+
+  <!-- TODAY -->
+  <div class="view" id="view-today">
+    <div class="summary">
+      <div class="summary-card"><span class="icon">🎓</span><div class="value">۴</div><div class="label">ساعت کلاس</div></div>
+      <div class="summary-card"><span class="icon">📖</span><div class="value">۲</div><div class="label">ساعت مطالعه</div></div>
+      <div class="summary-card"><span class="icon">💬</span><div class="value">۲</div><div class="label">ساعت مباحثه</div></div>
+    </div>
+
+    <div class="progress-card">
+      <div class="progress-head">
+        <span class="title">📊 پیشرفت امروز</span>
+        <span class="hours-live" id="hoursLive">
+          <strong id="totalHoursNum">۰</strong>
+          <span id="hoursLabel"> از ۸ ساعت</span>
+        </span>
+        <span class="percent" id="percent">۰٪</span>
+      </div>
+      <div class="bar"><div class="bar-fill" id="barFill"></div></div>
+    </div>
+
+    <!-- CLASS -->
+    <section data-section="class">
+      <div class="section-title gold">
+        <span class="ico">🎓</span>
+        <span>کلاس‌ها</span>
+        <span class="badge" data-section-badge="class">۴ ساعت</span>
+      </div>
+      <div class="items-list" data-section="class">
+        <div class="item" data-id="fq-shorut" data-hours="1">
+          <div class="drag-handle">⋮⋮</div>
+          <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span class="emoji">⚖️</span>
+          <div class="item-body">
+            <div class="item-title">فقه — شروط عوضین</div>
+            <div class="item-sub">درس خارج‌گونه / سطح عالی</div>
+          </div>
+          <div class="item-time">۱ ساعت</div>
+          <button class="item-toggle" title="فعال / غیرفعال">✓</button>
+        </div>
+        <div class="item" data-id="fq-gheb" data-hours="1">
+          <div class="drag-handle">⋮⋮</div>
+          <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span class="emoji">📜</span>
+          <div class="item-body">
+            <div class="item-title">فقه — خیار غبن</div>
+            <div class="item-sub">بحث خیارات معاملات</div>
+          </div>
+          <div class="item-time">۱ ساعت</div>
+          <button class="item-toggle" title="فعال / غیرفعال">✓</button>
+        </div>
+        <div class="item" data-id="us-kefaye" data-hours="1">
+          <div class="drag-handle">⋮⋮</div>
+          <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span class="emoji">🧩</span>
+          <div class="item-body">
+            <div class="item-title">اصول — کفایه</div>
+            <div class="item-sub">مباحث الفاظ / عقلی</div>
+          </div>
+          <div class="item-time">۱ ساعت</div>
+          <button class="item-toggle" title="فعال / غیرفعال">✓</button>
+        </div>
+        <div class="item" data-id="ph-nahaye" data-hours="1">
+          <div class="drag-handle">⋮⋮</div>
+          <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span class="emoji">🌌</span>
+          <div class="item-body">
+            <div class="item-title">فلسفه — نهایة الحکمة</div>
+            <div class="item-sub">امور عامه / الهیات</div>
+          </div>
+          <div class="item-time">۱ ساعت</div>
+          <button class="item-toggle" title="فعال / غیرفعال">✓</button>
+        </div>
+      </div>
+      <button class="add-item-btn" data-add-to="class">➕ افزودن آیتم دلخواه به کلاس‌ها</button>
+    </section>
+
+    <!-- STUDY -->
+    <section data-section="study">
+      <div class="section-title emerald">
+        <span class="ico">📖</span>
+        <span>مطالعه</span>
+        <span class="badge" data-section-badge="study">۲ ساعت</span>
+      </div>
+      <div class="items-list" data-section="study">
+        <div class="item" data-id="study-1" data-hours="1">
+          <div class="drag-handle">⋮⋮</div>
+          <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span class="emoji">🖋️</span>
+          <div class="item-body">
+            <div class="item-title">مطالعه — بخش اول</div>
+            <div class="item-sub">تحقیق و تعمیق مطالب کلاس</div>
+          </div>
+          <div class="item-time">۱ ساعت</div>
+          <button class="item-toggle" title="فعال / غیرفعال">✓</button>
+        </div>
+        <div class="item" data-id="study-2" data-hours="1">
+          <div class="drag-handle">⋮⋮</div>
+          <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span class="emoji">📚</span>
+          <div class="item-body">
+            <div class="item-title">مطالعه — بخش دوم</div>
+            <div class="item-sub">مرور و تثبیت مطالب</div>
+          </div>
+          <div class="item-time">۱ ساعت</div>
+          <button class="item-toggle" title="فعال / غیرفعال">✓</button>
+        </div>
+      </div>
+      <button class="add-item-btn" data-add-to="study">➕ افزودن آیتم دلخواه به مطالعه</button>
+    </section>
+
+    <!-- MOBAHASE -->
+    <section data-section="mobahase">
+      <div class="section-title violet">
+        <span class="ico">💬</span>
+        <span>مباحثه</span>
+        <span class="badge" data-section-badge="mobahase">۲ ساعت</span>
+      </div>
+      <div class="items-list" data-section="mobahase">
+        <div class="item" data-id="mobahase-1" data-hours="1">
+          <div class="drag-handle">⋮⋮</div>
+          <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span class="emoji">🗣️</span>
+          <div class="item-body">
+            <div class="item-title">مباحثه — نوبت اول</div>
+            <div class="item-sub">طرح و نقد مطالب با هم‌مباحثه</div>
+          </div>
+          <div class="item-time">۱ ساعت</div>
+          <button class="item-toggle" title="فعال / غیرفعال">✓</button>
+        </div>
+        <div class="item" data-id="mobahase-2" data-hours="1">
+          <div class="drag-handle">⋮⋮</div>
+          <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span class="emoji">💭</span>
+          <div class="item-body">
+            <div class="item-title">مباحثه — نوبت دوم</div>
+            <div class="item-sub">تعمیق و رفع اشکال</div>
+          </div>
+          <div class="item-time">۱ ساعت</div>
+          <button class="item-toggle" title="فعال / غیرفعال">✓</button>
+        </div>
+      </div>
+      <button class="add-item-btn" data-add-to="mobahase">➕ افزودن آیتم دلخواه به مباحثه</button>
+    </section>
+
+    <!-- FREE -->
+    <section>
+      <div class="section-title amber">
+        <span class="ico">✨</span>
+        <span>فعالیت‌های آزاد</span>
+        <span class="badge" id="freeBadge">۰ فعالیت</span>
+      </div>
+      <div class="free-card" id="freeCard">
+        <div class="free-icon">✨</div>
+        <div class="free-body">
+          <div class="free-title">تعداد کارهای آزاد انجام‌شده</div>
+          <div class="free-sub">چند فعالیت آزاد امروز انجام دادی؟</div>
+        </div>
+        <div class="free-input-wrap">
+          <input type="number" id="freeCountInput" class="free-input" min="0" max="20" step="1" placeholder="0" inputmode="numeric" />
+          <span class="free-unit">فعالیت</span>
+        </div>
+      </div>
+      <div class="free-blocks" id="freeBlocks"></div>
+      <div class="free-total" id="freeTotal" style="display:none;">
+        مجموع فعالیت‌های آزاد: <strong>۰ دقیقه</strong>
+      </div>
+    </section>
+
+    <!-- NOTES -->
+    <section>
+      <div class="section-title rose">
+        <span class="ico">📝</span>
+        <span>یادداشت امروز</span>
+        <span class="badge" id="notesBadge">۰ کاراکتر</span>
+      </div>
+      <div class="notes-card">
+        <div class="notes-head">
+          <span>✍️ یادداشت آزاد</span>
+          <span class="notes-count" id="notesCount">۰ / ۱۰۰۰</span>
+        </div>
+        <textarea id="dailyNote" class="notes-textarea" maxlength="1000" placeholder="هر نکته، فکر، برنامه یا خاطره‌ای که می‌خوای برای امروز ثبت کنی..."></textarea>
+      </div>
+    </section>
+
+    <div class="actions">
+      <button class="btn" id="reset">↺ بازنشانی امروز</button>
+      <button class="btn" id="reminderBtn">🔕 یادآورها</button>
+      <button class="btn" id="settingsBtn2">⚙️ تنظیمات</button>
+      <button class="btn primary" id="print">🖨️ چاپ / PDF</button>
+    </div>
+  </div>
+
+  <!-- ARCHIVE -->
+  <div class="view hidden" id="view-archive">
+    <section>
+      <div class="section-title gold">
+        <span class="ico">📅</span>
+        <span>آرشیو روزها</span>
+        <span class="badge" id="archive-count">۰ روز</span>
+      </div>
+      <div class="search-box" id="searchBox">
+        <input type="text" id="archiveSearch" placeholder="🔍 جستجو در تاریخ، دروس، فعالیت آزاد یا یادداشت..." autocomplete="off" />
+        <button class="search-clear" id="searchClear" type="button">✕</button>
+      </div>
+      <div class="search-info" id="searchInfo"></div>
+      <div id="archiveList"></div>
+    </section>
+
+    <div class="actions">
+      <button class="btn" id="exportJSON">📥 خروجی JSON</button>
+      <button class="btn" id="exportCSV">📊 خروجی CSV</button>
+      <button class="btn" id="importJSON">📤 بازیابی</button>
+      <button class="btn danger" id="clearArchive">🗑️ پاک کردن آرشیو</button>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="view hidden" id="view-stats">
+    <div class="stats-grid">
+      <div class="stat-card"><span class="stat-icon">🔥</span><div class="stat-value" id="stat-streak">۰</div><div class="stat-label">روز پیوسته</div></div>
+      <div class="stat-card"><span class="stat-icon">⏱️</span><div class="stat-value" id="stat-week-hours">۰<small>ساعت</small></div><div class="stat-label">این هفته</div></div>
+      <div class="stat-card"><span class="stat-icon">🎯</span><div class="stat-value" id="stat-avg">۰٪</div><div class="stat-label">میانگین ۳۰ روز</div></div>
+      <div class="stat-card"><span class="stat-icon">🏆</span><div class="stat-value" id="stat-perfect">۰</div><div class="stat-label">روز کامل</div></div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-header">
+        <h3>📈 <span id="chart-title">هفتهٔ جاری</span></h3>
+        <div class="range-btns">
+          <button class="range-btn active" data-range="7">۷ روز</button>
+          <button class="range-btn" data-range="30">۳۰ روز</button>
+        </div>
+      </div>
+      <div class="weekly-chart" id="weeklyChart"></div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-header">
+        <h3>✨ آمار جداگانه فعالیت‌های آزاد (۳۰ روز)</h3>
+      </div>
+      <div class="free-stats-grid">
+        <div class="free-stat">
+          <div class="free-stat-value" id="freeStatTotalMin">۰</div>
+          <div class="free-stat-label">مجموع دقیقه</div>
+        </div>
+        <div class="free-stat">
+          <div class="free-stat-value" id="freeStatTotalHr">۰</div>
+          <div class="free-stat-label">مجموع ساعت</div>
+        </div>
+        <div class="free-stat">
+          <div class="free-stat-value" id="freeStatCount">۰</div>
+          <div class="free-stat-label">تعداد فعالیت</div>
+        </div>
+        <div class="free-stat">
+          <div class="free-stat-value" id="freeStatAvg">۰</div>
+          <div class="free-stat-label">میانگین روزانه (دقیقه)</div>
+        </div>
+        <div class="free-stat">
+          <div class="free-stat-value" id="freeStatDays">۰</div>
+          <div class="free-stat-label">روزهای دارای فعالیت</div>
+        </div>
+        <div class="free-stat">
+          <div class="free-stat-value small" id="freeStatTop">—</div>
+          <div class="free-stat-label">پرکارترین فعالیت</div>
+        </div>
+      </div>
+      <div class="free-weekly-chart" id="freeWeeklyChart"></div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-header"><h3>🔥 نقشهٔ ۳۰ روز اخیر</h3></div>
+      <div class="heatmap" id="heatmap"></div>
+      <div class="heat-legend">
+        <span>کمتر</span>
+        <span class="legend-box" style="background:rgba(255,255,255,0.05)"></span>
+        <span class="legend-box" style="background:rgba(16,185,129,0.22)"></span>
+        <span class="legend-box" style="background:rgba(16,185,129,0.5)"></span>
+        <span class="legend-box" style="background:linear-gradient(135deg,rgba(232,183,58,0.75),rgba(16,185,129,0.55))"></span>
+        <span class="legend-box" style="background:linear-gradient(135deg,var(--accent),var(--emerald))"></span>
+        <span>بیشتر</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn danger" id="clearHistory">🗑️ پاک کردن آمار</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="bismillah">﷽</span>
+    <div class="quote">«العِلمُ نورٌ یَقذِفُهُ اللهُ فی قَلبِ مَن یَشاء»</div>
+    <div style="margin-top:10px; opacity:0.5;">
+      <span class="star">✦</span> ساخته شده برای مهدی جلالی <span class="star">✦</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- SETTINGS MODAL -->
+<div class="modal-overlay" id="settingsModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h2>⚙️ تنظیمات</h2>
+      <button class="modal-close" id="modalClose">✕</button>
+    </div>
+
+    <div class="setting-group">
+      <div class="setting-group-title"><span class="ico">🎨</span> تم و رنگ</div>
+      <div class="setting-label-block" style="margin-top:0;">تم آماده<small>یک تم برای کل رابط انتخاب کن</small></div>
+      <div class="theme-grid" id="themeGrid">
+        <button class="theme-btn active" data-theme="dark"><div class="theme-preview"><div class="theme-color" style="background:#050810"></div><div class="theme-color" style="background:#0f1626"></div><div class="theme-color" style="background:#e8b73a"></div></div><div class="theme-name">شبانه</div></button>
+        <button class="theme-btn" data-theme="light"><div class="theme-preview"><div class="theme-color" style="background:#f4efe2"></div><div class="theme-color" style="background:#ffffff"></div><div class="theme-color" style="background:#b8860b"></div></div><div class="theme-name">روشن</div></button>
+        <button class="theme-btn" data-theme="midnight"><div class="theme-preview"><div class="theme-color" style="background:#060a20"></div><div class="theme-color" style="background:#141c40"></div><div class="theme-color" style="background:#6366f1"></div></div><div class="theme-name">نیلی</div></button>
+        <button class="theme-btn" data-theme="ocean"><div class="theme-preview"><div class="theme-color" style="background:#02141c"></div><div class="theme-color" style="background:#063044"></div><div class="theme-color" style="background:#38bdf8"></div></div><div class="theme-name">اقیانوس</div></button>
+        <button class="theme-btn" data-theme="forest"><div class="theme-preview"><div class="theme-color" style="background:#041208"></div><div class="theme-color" style="background:#0e2a1a"></div><div class="theme-color" style="background:#10b981"></div></div><div class="theme-name">جنگل</div></button>
+        <button class="theme-btn" data-theme="violet"><div class="theme-preview"><div class="theme-color" style="background:#100620"></div><div class="theme-color" style="background:#281040"></div><div class="theme-color" style="background:#a78bfa"></div></div><div class="theme-name">بنفشه</div></button>
+        <button class="theme-btn" data-theme="sepia"><div class="theme-preview"><div class="theme-color" style="background:#ede4cc"></div><div class="theme-color" style="background:#fbf6e3"></div><div class="theme-color" style="background:#8a6d1f"></div></div><div class="theme-name">کاغذ کهنه</div></button>
+        <button class="theme-btn" data-theme="crimson"><div class="theme-preview"><div class="theme-color" style="background:#180408"></div><div class="theme-color" style="background:#38101c"></div><div class="theme-color" style="background:#fb7185"></div></div><div class="theme-name">سرخ</div></button>
+      </div>
+
+      <div class="setting-label-block">رنگ تأکیدی<small>رنگ دکمه‌ها و جزئیات</small></div>
+      <div class="accent-swatches" id="accentSwatches">
+        <div class="accent-swatch active" data-accent="#e8b73a" style="background:#e8b73a; color:#e8b73a;"></div>
+        <div class="accent-swatch" data-accent="#10b981" style="background:#10b981; color:#10b981;"></div>
+        <div class="accent-swatch" data-accent="#38bdf8" style="background:#38bdf8; color:#38bdf8;"></div>
+        <div class="accent-swatch" data-accent="#a78bfa" style="background:#a78bfa; color:#a78bfa;"></div>
+        <div class="accent-swatch" data-accent="#fb7185" style="background:#fb7185; color:#fb7185;"></div>
+        <div class="accent-swatch" data-accent="#f59e0b" style="background:#f59e0b; color:#f59e0b;"></div>
+        <label class="accent-custom" title="رنگ دلخواه">🎨<input type="color" id="customAccent" value="#e8b73a" /></label>
+      </div>
+    </div>
+
+    <div class="setting-group">
+      <div class="setting-group-title"><span class="ico">🔤</span> فونت و اندازه</div>
+      <div class="setting-row">
+        <div class="setting-label">اندازهٔ متن<small>۵ سطح از XS تا XL</small></div>
+        <div class="segmented" id="fontSizeSeg">
+          <button data-val="0.85">XS</button><button data-val="0.925">S</button>
+          <button data-val="1" class="active">M</button><button data-val="1.075">L</button>
+          <button data-val="1.15">XL</button>
+        </div>
+      </div>
+      <div class="setting-label-block">فونت عناوین<small>سرتیترها و نام دروس</small></div>
+      <div class="font-grid" id="titleFontGrid">
+        <button class="font-btn active" data-font="Vazirmatn" style="font-family:'Vazirmatn',sans-serif;">وزیرمتن</button>
+        <button class="font-btn" data-font="B Titr" style="font-family:'B Titr','Vazirmatn',sans-serif;">بی تیتر</button>
+        <button class="font-btn" data-font="Noto Naskh Arabic" style="font-family:'Noto Naskh Arabic',serif;">نسخ</button>
+        <button class="font-btn" data-font="Amiri" style="font-family:'Amiri',serif;">امیری</button>
+        <button class="font-btn" data-font="Gulzar" style="font-family:'Gulzar',serif;">گلزار</button>
+        <button class="font-btn" data-font="Markazi Text" style="font-family:'Markazi Text',serif;">مرکزی</button>
+      </div>
+      <div class="setting-label-block">فونت متن<small>متن‌های اصلی و یادداشت‌ها</small></div>
+      <div class="font-grid" id="bodyFontGrid">
+        <button class="font-btn active" data-font="Vazirmatn" style="font-family:'Vazirmatn',sans-serif;">وزیرمتن</button>
+        <button class="font-btn" data-font="B Titr" style="font-family:'B Titr','Vazirmatn',sans-serif;">بی تیتر</button>
+        <button class="font-btn" data-font="Noto Naskh Arabic" style="font-family:'Noto Naskh Arabic',serif;">نسخ</button>
+        <button class="font-btn" data-font="Amiri" style="font-family:'Amiri',serif;">امیری</button>
+        <button class="font-btn" data-font="Gulzar" style="font-family:'Gulzar',serif;">گلزار</button>
+        <button class="font-btn" data-font="Markazi Text" style="font-family:'Markazi Text',serif;">مرکزی</button>
+      </div>
+      <div class="setting-row" style="margin-top:16px;">
+        <div class="setting-label">پس‌زمینهٔ رنگی<small>جلوه‌های نورانی</small></div>
+        <label class="toggle"><input type="checkbox" id="auroraToggle" checked /><span class="toggle-slider"></span></label>
+      </div>
+      <div class="setting-row">
+        <div class="setting-label">بافت نویز</div>
+        <label class="toggle"><input type="checkbox" id="noiseToggle" checked /><span class="toggle-slider"></span></label>
+      </div>
+    </div>
+
+    <div class="setting-group">
+      <div class="setting-group-title"><span class="ico">🔔</span> یادآورها</div>
+      <div class="setting-row"><div class="setting-label">فعال بودن یادآورها</div><label class="toggle"><input type="checkbox" id="reminderToggle" /><span class="toggle-slider"></span></label></div>
+      <div class="setting-row"><div class="setting-label">یادآور اول</div><input type="time" id="reminder1Time" class="time-input" value="22:00" /></div>
+      <div class="setting-row"><div class="setting-label">یادآور دوم</div><input type="time" id="reminder2Time" class="time-input" value="23:59" /></div>
+      <div class="setting-row"><div class="setting-label">اعلان با Service Worker</div><label class="toggle"><input type="checkbox" id="swReminderToggle" /><span class="toggle-slider"></span></label></div>
+      <div class="setting-hint">💡 برای دریافت اعلان، اجازهٔ Notification لازم است.</div>
+    </div>
+
+    <div class="setting-group">
+      <div class="setting-group-title"><span class="ico">🌐</span> همگام‌سازی ابری (Firebase)</div>
+      <div class="setting-hint">
+        برای فعال‌سازی:<br>
+        ۱. به <code>console.firebase.google.com</code> برو<br>
+        ۲. Firestore Database رو فعال کن<br>
+        ۳. از Project Settings → Web App، کد <code>firebaseConfig</code> رو کپی کن<br>
+        ۴. اینجا پیست کن و روی «اتصال» بزن
+      </div>
+      <div class="setting-row" style="flex-direction:column; align-items:stretch;">
+        <div class="setting-label" style="margin-bottom:8px;">firebaseConfig (JSON)</div>
+        <textarea id="firebaseConfig" class="setting-textarea" placeholder='{ "apiKey": "...", "projectId": "...", ... }'></textarea>
+      </div>
+      <div class="setting-row">
+        <div class="setting-label">کد همگام‌سازی</div>
+        <input type="text" id="syncKey" class="setting-input" placeholder="مثلاً: mahdi-1403" />
+      </div>
+      <div class="setting-actions">
+        <button class="btn primary" id="cloudConnect">🔗 اتصال</button>
+        <button class="btn" id="cloudUpload">☁️ آپلود</button>
+        <button class="btn" id="cloudDownload">⬇️ دریافت</button>
+      </div>
+      <div class="sync-status idle" id="syncStatus">اتصال برقرار نیست</div>
+    </div>
+
+    <div class="setting-group">
+      <div class="setting-group-title"><span class="ico">💾</span> پشتیبان‌گیری</div>
+      <div class="setting-actions">
+        <button class="btn" id="exportJSON2">📥 خروجی JSON</button>
+        <button class="btn" id="exportCSV2">📊 خروجی CSV</button>
+      </div>
+    </div>
+
+    <div class="setting-group">
+      <div class="setting-group-title"><span class="ico">⚠️</span> بازنشانی</div>
+      <div class="setting-actions">
+        <button class="btn danger" id="resetAllSettings">↺ تنظیمات پیش‌فرض</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADD CUSTOM ITEM MODAL -->
+<div class="modal-overlay" id="addItemModal">
+  <div class="modal" style="max-width: 500px;">
+    <div class="modal-head">
+      <h2>➕ افزودن آیتم دلخواه</h2>
+      <button class="modal-close" id="addItemModalClose">✕</button>
+    </div>
+
+    <div class="setting-group">
+      <div class="setting-row" style="flex-direction:column; align-items:stretch;">
+        <div class="setting-label" style="margin-bottom:8px;">عنوان آیتم *</div>
+        <input type="text" id="newItemTitle" class="setting-input" maxlength="80" placeholder="مثلاً: تدریس" />
+      </div>
+
+      <div class="setting-row" style="flex-direction:column; align-items:stretch;">
+        <div class="setting-label" style="margin-bottom:8px;">توضیح کوتاه (اختیاری)</div>
+        <input type="text" id="newItemSub" class="setting-input" maxlength="100" placeholder="مثلاً: تدریس به طلبه‌های پایه پایین‌تر" />
+      </div>
+
+      <div class="setting-row" style="flex-direction:column; align-items:stretch;">
+        <div class="setting-label" style="margin-bottom:8px;">ایموجی</div>
+        <div class="emoji-picker" id="emojiPicker">
+          <button class="emoji-option selected" data-emoji="📌">📌</button>
+          <button class="emoji-option" data-emoji="📚">📚</button>
+          <button class="emoji-option" data-emoji="✍️">✍️</button>
+          <button class="emoji-option" data-emoji="🎓">🎓</button>
+          <button class="emoji-option" data-emoji="🧩">🧩</button>
+          <button class="emoji-option" data-emoji="💡">💡</button>
+          <button class="emoji-option" data-emoji="🏃">🏃</button>
+          <button class="emoji-option" data-emoji="🕌">🕌</button>
+          <button class="emoji-option" data-emoji="🎯">🎯</button>
+          <button class="emoji-option" data-emoji="🔬">🔬</button>
+          <button class="emoji-option" data-emoji="💻">💻</button>
+          <button class="emoji-option" data-emoji="🎨">🎨</button>
+          <button class="emoji-option" data-emoji="📝">📝</button>
+          <button class="emoji-option" data-emoji="🌙">🌙</button>
+          <button class="emoji-option" data-emoji="⭐">⭐</button>
+          <button class="emoji-option" data-emoji="❤️">❤️</button>
+        </div>
+      </div>
+
+      <div class="setting-row">
+        <div class="setting-label">مدت زمان<small>به ساعت</small></div>
+        <input type="number" id="newItemHours" class="setting-input" style="width:100px; text-align:center;" value="1" min="0.25" max="8" step="0.25" />
+      </div>
+
+      <div class="setting-row">
+        <div class="setting-label">بخش</div>
+        <div class="segmented" id="newItemSection">
+          <button data-val="class" class="active">کلاس‌ها</button>
+          <button data-val="study">مطالعه</button>
+          <button data-val="mobahase">مباحثه</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="setting-actions">
+      <button class="btn primary" id="newItemSave">💾 ذخیره</button>
+      <button class="btn" id="newItemCancel">انصراف</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<input type="file" id="importFileGlobal" accept=".json,application/json" style="display:none" />
+
+<script>
+/* ═══════════════════════════════════════════════════
+   HELPERS
+   ═══════════════════════════════════════════════════ */
+const toPersian = n => String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+const normalizeDigits = str => String(str)
+  .replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
+  .replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d));
+const todayKey = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; };
+const escapeHtml = (s) => String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const hexToRgb = (hex) => { const h = hex.replace('#',''); const b = parseInt(h.length===3 ? h.split('').map(c=>c+c).join('') : h, 16); return [(b>>16)&255, (b>>8)&255, b&255]; };
+const lightenColor = (hex, p) => { const [r,g,b] = hexToRgb(hex); const a = Math.round(2.55*p); return `rgb(${Math.min(255,r+a)},${Math.min(255,g+a)},${Math.min(255,b+a)})`; };
+const darkenColor = (hex, p) => { const [r,g,b] = hexToRgb(hex); const a = Math.round(2.55*p); return `rgb(${Math.max(0,r-a)},${Math.max(0,g-a)},${Math.max(0,b-a)})`; };
+
+const LIGHT_THEMES = ['light','sepia'];
+const DEFAULT_TARGET_HOURS = 8;
+const MAX_FREE_COUNT = 20;
+const MAX_MINUTES_PER_TASK = 1440;
+
+/* ═══════════════════════════════════════════════════
+   SETTINGS
+   ═══════════════════════════════════════════════════ */
+const SETTINGS_KEY = 'hawzah_settings_v9';
+const STORAGE_KEY = 'hawzah_checklist_v9';
+const HISTORY_KEY = 'hawzah_history_v9';
+const CUSTOM_ITEMS_KEY = 'hawzah_custom_items_v9';
+const ORDER_KEY = 'hawzah_order_v9';
+const REMINDER_LAST_KEY = 'hawzah_reminder_last_v9';
+
+const DEFAULT_SETTINGS = {
+  theme: 'dark', accent: '#e8b73a', fontScale: '1',
+  titleFont: 'Vazirmatn', bodyFont: 'Vazirmatn',
+  aurora: true, noise: true,
+  reminderEnabled: false, reminder1Time: '22:00', reminder2Time: '23:59', swReminder: false,
+  firebaseConfig: '', syncKey: ''
+};
+
+function loadSettings(){ try{ return { ...DEFAULT_SETTINGS, ...JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}') }; }catch(e){ return { ...DEFAULT_SETTINGS }; } }
+function saveSettings(s){ try{ localStorage.setItem(SETTINGS_KEY, JSON.stringify(s)); }catch(e){} }
+let settings = loadSettings();
+
+function applySettings(){
+  const accent = settings.accent;
+  const [r,g,b] = hexToRgb(accent);
+  document.documentElement.style.setProperty('--accent', accent);
+  document.documentElement.style.setProperty('--accent-light', lightenColor(accent, 20));
+  document.documentElement.style.setProperty('--accent-deep', darkenColor(accent, 22));
+  document.documentElement.style.setProperty('--accent-rgb', `${r}, ${g}, ${b}`);
+  document.documentElement.style.setProperty('--font-scale', settings.fontScale);
+  document.documentElement.style.setProperty('--font-title', `'${settings.titleFont}', 'Vazirmatn', serif`);
+  document.documentElement.style.setProperty('--font-body', `'${settings.bodyFont}', 'Vazirmatn', system-ui, sans-serif`);
+
+  document.body.dataset.theme = settings.theme;
+  document.body.classList.toggle('theme-is-light', LIGHT_THEMES.includes(settings.theme));
+  document.body.classList.toggle('no-aurora', !settings.aurora);
+  document.body.classList.toggle('no-noise', !settings.noise);
+
+  document.querySelectorAll('.theme-btn').forEach(b => b.classList.toggle('active', b.dataset.theme === settings.theme));
+  document.querySelectorAll('.accent-swatch').forEach(s => s.classList.toggle('active', s.dataset.accent.toLowerCase() === accent.toLowerCase()));
+  document.querySelectorAll('#fontSizeSeg button').forEach(b => b.classList.toggle('active', b.dataset.val === settings.fontScale));
+  document.querySelectorAll('#titleFontGrid .font-btn').forEach(b => b.classList.toggle('active', b.dataset.font === settings.titleFont));
+  document.querySelectorAll('#bodyFontGrid .font-btn').forEach(b => b.classList.toggle('active', b.dataset.font === settings.bodyFont));
+
+  const auroraT = document.getElementById('auroraToggle'); if(auroraT) auroraT.checked = settings.aurora;
+  const noiseT = document.getElementById('noiseToggle'); if(noiseT) noiseT.checked = settings.noise;
+  const reminderT = document.getElementById('reminderToggle'); if(reminderT) reminderT.checked = settings.reminderEnabled;
+  const swT = document.getElementById('swReminderToggle'); if(swT) swT.checked = settings.swReminder;
+  const r1 = document.getElementById('reminder1Time'); if(r1) r1.value = settings.reminder1Time;
+  const r2 = document.getElementById('reminder2Time'); if(r2) r2.value = settings.reminder2Time;
+  const fbc = document.getElementById('firebaseConfig'); if(fbc) fbc.value = settings.firebaseConfig;
+  const sk = document.getElementById('syncKey'); if(sk) sk.value = settings.syncKey;
+  updateReminderBtn();
+}
+
+/* ═══════════════════════════════════════════════════
+   PWA MANIFEST + SW
+   ═══════════════════════════════════════════════════ */
+(function(){
+  const iconSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e8b73a"/><stop offset="1" stop-color="#10b981"/></linearGradient></defs><rect width="512" height="512" rx="120" fill="#050810"/><circle cx="256" cy="256" r="200" fill="none" stroke="url(#g)" stroke-width="8" opacity="0.35"/><text x="256" y="320" text-anchor="middle" font-size="230" font-family="serif" fill="url(#g)" font-weight="bold">﷽</text></svg>`;
+  const iconData = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(iconSVG)));
+  window.__faviconData = iconData;
+  document.getElementById('favicon-link').href = iconData;
+  const manifest = {
+    name: "لیست ساعت کاری — مهدی جلالی", short_name: "ساعت کاری",
+    start_url: ".", scope: ".", display: "standalone", orientation: "portrait",
+    background_color: "#050810", theme_color: "#050810",
+    dir: "rtl", lang: "fa",
+    icons: [
+      { src: iconData, sizes: "192x192", type: "image/svg+xml", purpose: "any" },
+      { src: iconData, sizes: "512x512", type: "image/svg+xml", purpose: "any maskable" }
+    ]
+  };
+  const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+  document.getElementById('manifest-link').href = URL.createObjectURL(blob);
+})();
+
+let swRegistration = null;
+async function registerSW(){
+  if(!('serviceWorker' in navigator)) return;
+  if(location.protocol === 'file:') return;
+  try{ swRegistration = await navigator.serviceWorker.register('sw.js'); }catch(e){ console.log('SW not available', e.message); }
+}
+registerSW();
+
+/* ═══════════════════════════════════════════════════
+   CUSTOM ITEMS
+   ═══════════════════════════════════════════════════ */
+function loadCustomItems(){
+  try{ return JSON.parse(localStorage.getItem(CUSTOM_ITEMS_KEY) || '[]'); }catch(e){ return []; }
+}
+function saveCustomItems(arr){
+  try{ localStorage.setItem(CUSTOM_ITEMS_KEY, JSON.stringify(arr)); }catch(e){}
+}
+let customItems = loadCustomItems();
+
+function createCustomItemHTML(item){
+  return `
+    <div class="drag-handle">⋮⋮</div>
+    <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <span class="emoji">${escapeHtml(item.emoji || '📌')}</span>
+    <div class="item-body">
+      <div class="item-title">${escapeHtml(item.title)}</div>
+      <div class="item-sub">${escapeHtml(item.subtitle || 'آیتم دلخواه')}</div>
+    </div>
+    <div class="item-time">${toPersian(item.hours)} ساعت</div>
+    <button class="item-toggle" title="فعال / غیرفعال">✓</button>
+    <button class="item-delete" title="حذف">🗑️</button>
+  `;
+}
+
+function renderCustomItems(){
+  document.querySelectorAll('.item[data-custom="true"]').forEach(el => el.remove());
+  customItems.forEach(item => {
+    const listEl = document.querySelector(`.items-list[data-section="${item.section}"]`);
+    if(!listEl) return;
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.dataset.id = item.id;
+    div.dataset.hours = item.hours;
+    div.dataset.custom = 'true';
+    div.dataset.section = item.section;
+    div.innerHTML = createCustomItemHTML(item);
+    listEl.appendChild(div);
+  });
+}
+
+/* ═══════════════════════════════════════════════════
+   ORDER (DRAG & DROP)
+   ═══════════════════════════════════════════════════ */
+function loadOrder(){
+  try{ return JSON.parse(localStorage.getItem(ORDER_KEY) || '{}'); }catch(e){ return {}; }
+}
+function saveOrder(order){
+  try{ localStorage.setItem(ORDER_KEY, JSON.stringify(order)); }catch(e){}
+}
+
+function applyOrder(){
+  const order = loadOrder();
+  Object.keys(order).forEach(section => {
+    const listEl = document.querySelector(`.items-list[data-section="${section}"]`);
+    if(!listEl) return;
+    const ids = order[section];
+    if(!Array.isArray(ids)) return;
+    const items = Array.from(listEl.querySelectorAll('.item'));
+    const itemsById = {};
+    items.forEach(it => itemsById[it.dataset.id] = it);
+    ids.forEach(id => {
+      const el = itemsById[id];
+      if(el) listEl.appendChild(el);
+    });
+  });
+}
+
+function captureOrder(section){
+  const listEl = document.querySelector(`.items-list[data-section="${section}"]`);
+  if(!listEl) return [];
+  return Array.from(listEl.querySelectorAll('.item')).map(it => it.dataset.id);
+}
+
+function saveOrderForSection(section){
+  const order = loadOrder();
+  order[section] = captureOrder(section);
+  saveOrder(order);
+}
+
+/* ═══════════════════════════════════════════════════
+   DRAG & DROP
+   ═══════════════════════════════════════════════════ */
+let dragSrcEl = null;
+let dragSrcSection = null;
+
+function setupDragDropForItem(item){
+  if(item.draggable) return;
+  item.draggable = true;
+
+  item.addEventListener('dragstart', (e) => {
+    dragSrcEl = item;
+    dragSrcSection = item.closest('.items-list')?.dataset.section;
+    item.classList.add('dragging');
+    try{ e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', item.dataset.id); }catch(_){}
+  });
+
+  item.addEventListener('dragend', () => {
+    item.classList.remove('dragging');
+    document.querySelectorAll('.item').forEach(it => it.classList.remove('drag-over-top','drag-over-bottom'));
+    dragSrcEl = null;
+    dragSrcSection = null;
+  });
+
+  item.addEventListener('dragover', (e) => {
+    if(!dragSrcEl || dragSrcEl === item) return;
+    const targetSection = item.closest('.items-list')?.dataset.section;
+    if(targetSection !== dragSrcSection) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    const rect = item.getBoundingClientRect();
+    const midY = rect.top + rect.height / 2;
+    document.querySelectorAll('.item').forEach(it => it.classList.remove('drag-over-top','drag-over-bottom'));
+    if(e.clientY < midY) item.classList.add('drag-over-top');
+    else item.classList.add('drag-over-bottom');
+  });
+
+  item.addEventListener('dragleave', () => {
+    item.classList.remove('drag-over-top','drag-over-bottom');
+  });
+
+  item.addEventListener('drop', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if(!dragSrcEl || dragSrcEl === item) return;
+    const targetSection = item.closest('.items-list')?.dataset.section;
+    if(targetSection !== dragSrcSection) return;
+    const rect = item.getBoundingClientRect();
+    const midY = rect.top + rect.height / 2;
+    const parent = item.parentNode;
+    if(e.clientY < midY){
+      parent.insertBefore(dragSrcEl, item);
+    } else {
+      parent.insertBefore(dragSrcEl, item.nextSibling);
+    }
+    item.classList.remove('drag-over-top','drag-over-bottom');
+    saveOrderForSection(targetSection);
+    saveState();
+    showToast('🔀 ترتیب ذخیره شد', 'gold');
+  });
+}
+
+function setupAllDragDrop(){
+  document.querySelectorAll('.item').forEach(setupDragDropForItem);
+}
+
+/* ═══════════════════════════════════════════════════
+   STATE
+   ═══════════════════════════════════════════════════ */
+const freeInput = document.getElementById('freeCountInput');
+const freeCard = document.getElementById('freeCard');
+const freeBadge = document.getElementById('freeBadge');
+const freeBlocks = document.getElementById('freeBlocks');
+const freeTotal = document.getElementById('freeTotal');
+const dailyTarget = document.getElementById('dailyTarget');
+const barFill = document.getElementById('barFill');
+const percentEl = document.getElementById('percent');
+const totalHoursNum = document.getElementById('totalHoursNum');
+const hoursLive = document.getElementById('hoursLive');
+const hoursLabel = document.getElementById('hoursLabel');
+const dailyNote = document.getElementById('dailyNote');
+const notesCount = document.getElementById('notesCount');
+const notesBadge = document.getElementById('notesBadge');
+const toast = document.getElementById('toast');
+
+function getAllItems(){ return Array.from(document.querySelectorAll('.item')); }
+
+function getDailyTarget(){
+  if(!dailyTarget) return DEFAULT_TARGET_HOURS;
+  const v = parseFloat(dailyTarget.value);
+  if(isNaN(v) || v <= 0) return DEFAULT_TARGET_HOURS;
+  return Math.min(v, 24);
+}
+
+function getFreeCount(){
+  if(!freeInput) return 0;
+  const v = parseInt(freeInput.value);
+  if(isNaN(v) || v < 0) return 0;
+  return Math.min(v, MAX_FREE_COUNT);
+}
+
+function getFreeMinutes(){
+  let total = 0;
+  freeBlocks.querySelectorAll('.free-block-minutes').forEach(inp => {
+    const v = parseInt(inp.value);
+    if(!isNaN(v) && v > 0) total += Math.min(v, MAX_MINUTES_PER_TASK);
+  });
+  return total;
+}
+
+function getFreeBlocksData(){
+  const arr = [];
+  freeBlocks.querySelectorAll('.free-block').forEach(block => {
+    const title = block.querySelector('.free-block-title')?.value?.trim() || '';
+    const minutes = parseInt(block.querySelector('.free-block-minutes')?.value) || 0;
+    arr.push({ title, minutes: Math.max(0, Math.min(minutes, MAX_MINUTES_PER_TASK)) });
+  });
+  return arr;
+}
+
+function getEnabledMap(){
+  const map = {};
+  getAllItems().forEach(it => map[it.dataset.id] = !it.classList.contains('disabled'));
+  return map;
+}
+
+/* ═══════════════════════════════════════════════════
+   FREE BLOCKS
+   ═══════════════════════════════════════════════════ */
+function renderFreeBlocks(preserveData){
+  const count = getFreeCount();
+  const existing = preserveData || getFreeBlocksData();
+  freeBlocks.innerHTML = '';
+  if(count === 0){
+    if(freeTotal) freeTotal.style.display = 'none';
+    if(freeCard) freeCard.classList.remove('has-value');
+    updateFreeBadge();
+    return;
+  }
+  if(freeCard) freeCard.classList.add('has-value');
+  if(freeTotal) freeTotal.style.display = 'block';
+  for(let i = 0; i < count; i++){
+    const data = existing[i] || { title: '', minutes: 0 };
+    const block = document.createElement('div');
+    block.className = 'free-block';
+    block.style.animationDelay = (i * 0.05) + 's';
+    block.innerHTML = `
+      <div class="free-block-number">${toPersian(i + 1)}</div>
+      <input type="text" class="free-block-title" maxlength="120" placeholder="عنوان فعالیت آزاد..." value="${escapeHtml(data.title)}" />
+      <input type="number" class="free-block-minutes" min="0" max="${MAX_MINUTES_PER_TASK}" step="5" inputmode="numeric" placeholder="۰" value="${data.minutes > 0 ? data.minutes : ''}" />
+      <span class="free-block-unit">دقیقه</span>
+    `;
+    freeBlocks.appendChild(block);
+  }
+  freeBlocks.querySelectorAll('.free-block-title, .free-block-minutes').forEach(inp => {
+    inp.addEventListener('input', () => { updateFreeTotal(); update(); saveState(); });
+  });
+  updateFreeTotal();
+  updateFreeBadge();
+}
+
+function updateFreeTotal(){
+  const mins = getFreeMinutes();
+  if(freeTotal){
+    const hrs = Math.round((mins / 60) * 10) / 10;
+    freeTotal.innerHTML = `مجموع فعالیت‌های آزاد: <strong>${toPersian(mins)} دقیقه</strong> (${toPersian(hrs)} ساعت)`;
+  }
+  updateFreeBadge();
+}
+
+function updateFreeBadge(){
+  if(!freeBadge) return;
+  const count = getFreeCount();
+  const mins = getFreeMinutes();
+  freeBadge.textContent = count > 0 ? `${toPersian(count)} فعالیت — ${toPersian(mins)} دقیقه` : '۰ فعالیت';
+}
+
+/* ═══════════════════════════════════════════════════
+   LOAD / SAVE
+   ═══════════════════════════════════════════════════ */
+function loadState(){
+  try{
+    renderCustomItems();
+    applyOrder();
+    setupAllDragDrop();
+
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+
+    if(saved.__date && saved.__date !== todayKey()){
+      getAllItems().forEach(it => { it.classList.remove('done'); it.classList.remove('disabled'); });
+      if(freeInput) freeInput.value = '';
+      if(dailyNote) dailyNote.value = '';
+      if(dailyTarget) dailyTarget.value = DEFAULT_TARGET_HOURS;
+      renderFreeBlocks([]);
+      updateNotesCount();
+      saveState();
+      return;
+    }
+
+    getAllItems().forEach(it => {
+      if(saved[it.dataset.id]) it.classList.add('done'); else it.classList.remove('done');
+      const enabled = saved.__enabled && saved.__enabled[it.dataset.id] !== false;
+      it.classList.toggle('disabled', !enabled);
+    });
+
+    if(dailyTarget && saved.__target) dailyTarget.value = saved.__target;
+    if(freeInput && saved.__freeCount != null) freeInput.value = saved.__freeCount;
+    const blocksData = Array.isArray(saved.__freeBlocks) ? saved.__freeBlocks : [];
+    renderFreeBlocks(blocksData);
+    if(dailyNote && saved.__note) dailyNote.value = saved.__note;
+
+    updateFreeTotal();
+    updateNotesCount();
+  }catch(e){ console.warn('loadState error:', e); }
+}
+
+function saveState(){
+  const state = {
+    __date: todayKey(),
+    __target: getDailyTarget(),
+    __freeCount: getFreeCount(),
+    __freeBlocks: getFreeBlocksData(),
+    __note: dailyNote ? dailyNote.value : '',
+    __enabled: getEnabledMap()
+  };
+  getAllItems().forEach(it => state[it.dataset.id] = it.classList.contains('done'));
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){}
+}
+
+function computeProgress(){
+  let done = 0;
+  getAllItems().forEach(it => {
+    if(it.classList.contains('done') && !it.classList.contains('disabled')){
+      done += parseFloat(it.dataset.hours) || 0;
+    }
+  });
+  done += getFreeMinutes() / 60;
+  const target = getDailyTarget();
+  const percent = target > 0 ? Math.round((Math.min(done, target) / target) * 100) : 0;
+  return { done, percent, target };
+}
+
+function saveToHistory(){
+  const { done, percent, target } = computeProgress();
+  const checkedIds = [];
+  getAllItems().forEach(it => {
+    if(it.classList.contains('done') && !it.classList.contains('disabled')){
+      checkedIds.push(it.dataset.id);
+    }
+  });
+  const customSnapshot = customItems.map(c => ({
+    id: c.id, section: c.section, emoji: c.emoji, title: c.title, subtitle: c.subtitle, hours: c.hours
+  }));
+  try{
+    const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '{}');
+    history[todayKey()] = {
+      hours: Math.round(done * 100) / 100,
+      percent, target,
+      items: checkedIds,
+      enabled: getEnabledMap(),
+      customItemsSnapshot: customSnapshot,
+      freeMinutes: getFreeMinutes(),
+      freeBlocks: getFreeBlocksData(),
+      note: dailyNote ? dailyNote.value : ''
+    };
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+  }catch(e){}
+}
+
+function update(){
+  try{
+    const { done, percent, target } = computeProgress();
+    const visualPercent = target > 0 ? Math.min(100, (done / target) * 100) : 0;
+
+    if(barFill) barFill.style.width = visualPercent + '%';
+    if(percentEl) percentEl.textContent = toPersian(percent) + '٪';
+
+    if(totalHoursNum){
+      const rounded = Math.round(done * 10) / 10;
+      totalHoursNum.textContent = toPersian(rounded);
+    }
+
+    if(hoursLive && hoursLabel){
+      hoursLive.classList.toggle('over', done > target);
+      hoursLabel.textContent = done > target
+        ? ' ساعت (فراتر از هدف)'
+        : ` از ${toPersian(target)} ساعت`;
+    }
+
+    saveToHistory();
+    renderStats();
+  }catch(e){
+    console.warn('update error:', e);
+  }
+}
+
+function updateNotesCount(){
+  if(!dailyNote || !notesCount || !notesBadge) return;
+  const len = dailyNote.value.length;
+  notesCount.textContent = `${toPersian(len)} / ${toPersian(1000)}`;
+  notesBadge.textContent = `${toPersian(len)} کاراکتر`;
+}
+
+/* ═══════════════════════════════════════════════════
+   TOAST
+   ═══════════════════════════════════════════════════ */
+let toastTimer;
+function showToast(msg, variant=''){
+  if(!toast) return;
+  toast.textContent = msg;
+  toast.className = 'toast' + (variant ? ' ' + variant : '');
+  void toast.offsetWidth;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=> toast.classList.remove('show'), 2600);
+}
+
+/* ═══════════════════════════════════════════════════
+   DELEGATED EVENTS
+   ═══════════════════════════════════════════════════ */
+document.addEventListener('click', (e) => {
+  const item = e.target.closest('.item');
+  if(!item) return;
+
+  if(e.target.closest('.item-delete')){
+    e.stopPropagation();
+    const id = item.dataset.id;
+    if(!confirm('آیا این آیتم دلخواه حذف بشه؟')) return;
+    customItems = customItems.filter(c => c.id !== id);
+    saveCustomItems(customItems);
+    item.remove();
+    update(); saveState();
+    showToast('🗑️ آیتم حذف شد', 'red');
+    return;
+  }
+
+  if(e.target.closest('.item-toggle')){
+    e.stopPropagation();
+    const isDisabled = item.classList.toggle('disabled');
+    if(isDisabled){ item.classList.remove('done'); showToast('🚫 غیرفعال شد', 'gold'); }
+    else showToast('✓ فعال شد');
+    update(); saveState();
+    return;
+  }
+
+  if(item.classList.contains('disabled')) return;
+  item.classList.toggle('done');
+  update();
+  saveState();
+  if(item.classList.contains('done')) showToast('✓ ثبت شد');
+});
+
+/* ═══════════════════════════════════════════════════
+   INPUTS
+   ═══════════════════════════════════════════════════ */
+if(freeInput){
+  freeInput.addEventListener('input', () => {
+    let v = parseInt(freeInput.value);
+    if(!isNaN(v)){
+      if(v < 0){ freeInput.value = ''; }
+      else if(v > MAX_FREE_COUNT){ freeInput.value = MAX_FREE_COUNT; }
+    }
+    renderFreeBlocks();
+    update(); saveState();
+  });
+  freeInput.addEventListener('click', e => e.stopPropagation());
+}
+
+if(dailyTarget){
+  dailyTarget.addEventListener('input', () => {
+    let v = parseFloat(dailyTarget.value);
+    if(!isNaN(v)){
+      if(v < 1){ dailyTarget.value = ''; }
+      else if(v > 24){ dailyTarget.value = 24; }
+    }
+    update(); saveState();
+  });
+  dailyTarget.addEventListener('blur', () => {
+    dailyTarget.value = getDailyTarget();
+  });
+}
+
+if(dailyNote){
+  let noteSaveTimer;
+  dailyNote.addEventListener('input', () => {
+    updateNotesCount();
+    clearTimeout(noteSaveTimer);
+    noteSaveTimer = setTimeout(() => { saveState(); saveToHistory(); }, 500);
+  });
+}
+
+/* ═══════════════════════════════════════════════════
+   BUTTONS
+   ═══════════════════════════════════════════════════ */
+document.getElementById('reset').addEventListener('click', () => {
+  if(!confirm('آیا مطمئنی می‌خوای لیست امروز رو بازنشانی کنی؟')) return;
+  getAllItems().forEach(it => it.classList.remove('done'));
+  if(freeInput) freeInput.value = '';
+  if(dailyNote) dailyNote.value = '';
+  if(dailyTarget) dailyTarget.value = DEFAULT_TARGET_HOURS;
+  renderFreeBlocks([]);
+  updateNotesCount();
+  update(); saveState();
+  showToast('↺ لیست امروز بازنشانی شد', 'gold');
+});
+
+document.getElementById('print').addEventListener('click', () => window.print());
+
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const target = tab.dataset.tab;
+    document.getElementById('view-today').classList.toggle('hidden', target !== 'today');
+    document.getElementById('view-stats').classList.toggle('hidden', target !== 'stats');
+    document.getElementById('view-archive').classList.toggle('hidden', target !== 'archive');
+    if(target === 'stats') renderStats();
+    if(target === 'archive') renderArchive();
+  });
+});
+
+/* ═══════════════════════════════════════════════════
+   ADD CUSTOM ITEM MODAL
+   ═══════════════════════════════════════════════════ */
+const addItemModal = document.getElementById('addItemModal');
+let selectedEmoji = '📌';
+let selectedSection = 'class';
+
+function openAddItemModal(section){
+  selectedSection = section || 'class';
+  document.getElementById('newItemTitle').value = '';
+  document.getElementById('newItemSub').value = '';
+  document.getElementById('newItemHours').value = '1';
+  selectedEmoji = '📌';
+  document.querySelectorAll('#emojiPicker .emoji-option').forEach(b => b.classList.toggle('selected', b.dataset.emoji === selectedEmoji));
+  document.querySelectorAll('#newItemSection button').forEach(b => b.classList.toggle('active', b.dataset.val === selectedSection));
+  addItemModal.classList.add('show');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('newItemTitle').focus(), 300);
+}
+
+function closeAddItemModal(){
+  addItemModal.classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.add-item-btn').forEach(btn => {
+  btn.addEventListener('click', () => openAddItemModal(btn.dataset.addTo));
+});
+
+document.getElementById('addItemModalClose').addEventListener('click', closeAddItemModal);
+document.getElementById('newItemCancel').addEventListener('click', closeAddItemModal);
+addItemModal.addEventListener('click', (e) => {
+  if(e.target === addItemModal) closeAddItemModal();
+});
+
+document.querySelectorAll('#emojiPicker .emoji-option').forEach(btn => {
+  btn.addEventListener('click', () => {
+    selectedEmoji = btn.dataset.emoji;
+    document.querySelectorAll('#emojiPicker .emoji-option').forEach(b => b.classList.toggle('selected', b === btn));
+  });
+});
+
+document.querySelectorAll('#newItemSection button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    selectedSection = btn.dataset.val;
+    document.querySelectorAll('#newItemSection button').forEach(b => b.classList.toggle('active', b === btn));
+  });
+});
+
+document.getElementById('newItemSave').addEventListener('click', () => {
+  const title = document.getElementById('newItemTitle').value.trim();
+  const subtitle = document.getElementById('newItemSub').value.trim();
+  const hours = parseFloat(document.getElementById('newItemHours').value) || 1;
+
+  if(!title){
+    showToast('❌ عنوان الزامی است', 'red');
+    document.getElementById('newItemTitle').focus();
+    return;
+  }
+  if(hours <= 0 || hours > 24){
+    showToast('❌ ساعت نامعتبر', 'red');
+    return;
+  }
+
+  const id = 'custom-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7);
+  const newItem = { id, section: selectedSection, emoji: selectedEmoji, title, subtitle, hours };
+  customItems.push(newItem);
+  saveCustomItems(customItems);
+
+  const listEl = document.querySelector(`.items-list[data-section="${selectedSection}"]`);
+  if(listEl){
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.dataset.id = newItem.id;
+    div.dataset.hours = newItem.hours;
+    div.dataset.custom = 'true';
+    div.dataset.section = newItem.section;
+    div.innerHTML = createCustomItemHTML(newItem);
+    listEl.appendChild(div);
+    setupDragDropForItem(div);
+  }
+
+  saveOrderForSection(selectedSection);
+  update(); saveState();
+  closeAddItemModal();
+  showToast('✅ آیتم اضافه شد');
+});
+
+/* ═══════════════════════════════════════════════════
+   STATS
+   ═══════════════════════════════════════════════════ */
+let currentRange = 7;
+
+document.querySelectorAll('.range-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.range-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentRange = parseInt(btn.dataset.range);
+    document.getElementById('chart-title').textContent = currentRange === 7 ? 'هفتهٔ جاری' : '۳۰ روز اخیر';
+    renderWeeklyChart(currentRange);
+  });
+});
+
+function getHistoryArray(days){
+  const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '{}');
+  const arr = [];
+  const today = new Date();
+  for(let i = days - 1; i >= 0; i--){
+    const d = new Date(today);
+    d.setDate(d.getDate() - i);
+    const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const rec = history[key] || { hours: 0, percent: 0, freeMinutes: 0 };
+    arr.push({
+      date: key,
+      weekday: d.toLocaleDateString('fa-IR', { weekday: 'narrow' }),
+      dayNum: d.toLocaleDateString('fa-IR', { day: 'numeric' }),
+      hours: rec.hours,
+      percent: rec.percent,
+      freeMinutes: rec.freeMinutes || 0,
+      isToday: i === 0
+    });
+  }
+  return arr;
+}
+
+function renderWeeklyChart(days){
+  const container = document.getElementById('weeklyChart');
+  if(!container) return;
+  container.innerHTML = '';
+  const data = getHistoryArray(days);
+  container.style.gridTemplateColumns = days === 30 ? `repeat(${days}, 1fr)` : 'repeat(7, 1fr)';
+  container.style.height = '190px';
+  const maxHours = Math.max(DEFAULT_TARGET_HOURS, ...data.map(d => d.hours));
+  data.forEach((d, idx) => {
+    const col = document.createElement('div');
+    col.className = 'day-col';
+    const bar = document.createElement('div');
+    bar.className = 'day-bar' + (d.hours === 0 ? ' empty' : '');
+    bar.style.height = Math.max(4, (d.hours / maxHours) * 100) + '%';
+    if(d.hours > 0){
+      const val = document.createElement('span');
+      val.className = 'day-value';
+      val.textContent = toPersian(Math.round(d.hours * 10) / 10) + 'س';
+      bar.appendChild(val);
+    }
+    const label = document.createElement('span');
+    label.className = 'day-label' + (d.isToday ? ' today' : '');
+    if(days === 7) label.textContent = d.weekday;
+    else if(idx % 5 === 0 || d.isToday) label.textContent = d.dayNum;
+    col.appendChild(bar);
+    col.appendChild(label);
+    container.appendChild(col);
+  });
+}
+
+function renderFreeWeeklyChart(){
+  const container = document.getElementById('freeWeeklyChart');
+  if(!container) return;
+  container.innerHTML = '';
+  const data = getHistoryArray(7);
+  const maxMin = Math.max(60, ...data.map(d => d.freeMinutes));
+  data.forEach((d) => {
+    const col = document.createElement('div');
+    col.className = 'free-day-col';
+    const bar = document.createElement('div');
+    bar.className = 'free-day-bar' + (d.freeMinutes === 0 ? ' empty' : '');
+    bar.style.height = Math.max(4, (d.freeMinutes / maxMin) * 100) + '%';
+    if(d.freeMinutes > 0){
+      const val = document.createElement('span');
+      val.className = 'free-day-value';
+      val.textContent = toPersian(d.freeMinutes);
+      bar.appendChild(val);
+    }
+    const label = document.createElement('span');
+    label.className = 'free-day-label' + (d.isToday ? ' today' : '');
+    label.textContent = d.weekday;
+    col.appendChild(bar);
+    col.appendChild(label);
+    container.appendChild(col);
+  });
+}
+
+function renderFreeStats(){
+  const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '{}');
+  const arr = getHistoryArray(30);
+
+  let totalMin = 0;
+  let totalBlocks = 0;
+  let activeDays = 0;
+  const titleMinutes = {};
+
+  arr.forEach(d => {
+    const rec = history[d.date];
+    if(!rec) return;
+    const blocks = rec.freeBlocks || [];
+    let dayMin = 0;
+    blocks.forEach(b => {
+      const m = b.minutes || 0;
+      dayMin += m;
+      totalBlocks += 1;
+      const title = (b.title || '').trim();
+      if(title) titleMinutes[title] = (titleMinutes[title] || 0) + m;
+    });
+    if(dayMin > 0) activeDays += 1;
+    totalMin += dayMin;
+  });
+
+  const totalHr = Math.round((totalMin / 60) * 10) / 10;
+  const avg = activeDays > 0 ? Math.round(totalMin / activeDays) : 0;
+
+  let topTitle = '—';
+  let topMin = 0;
+  Object.entries(titleMinutes).forEach(([t, m]) => {
+    if(m > topMin){ topMin = m; topTitle = t; }
+  });
+
+  const elMin = document.getElementById('freeStatTotalMin');
+  const elHr = document.getElementById('freeStatTotalHr');
+  const elCnt = document.getElementById('freeStatCount');
+  const elAvg = document.getElementById('freeStatAvg');
+  const elDays = document.getElementById('freeStatDays');
+  const elTop = document.getElementById('freeStatTop');
+
+  if(elMin) elMin.textContent = toPersian(totalMin);
+  if(elHr) elHr.textContent = toPersian(totalHr);
+  if(elCnt) elCnt.textContent = toPersian(totalBlocks);
+  if(elAvg) elAvg.textContent = toPersian(avg);
+  if(elDays) elDays.textContent = toPersian(activeDays);
+  if(elTop) elTop.textContent = topTitle !== '—' ? `${topTitle} (${toPersian(topMin)}د)` : '—';
+
+  renderFreeWeeklyChart();
+}
+
+function renderHeatmap(){
+  const container = document.getElementById('heatmap');
+  if(!container) return;
+  container.innerHTML = '';
+  const data = getHistoryArray(30);
+  data.forEach(d => {
+    const cell = document.createElement('div');
+    cell.className = 'heat-cell';
+    if(d.percent >= 100) cell.classList.add('level-4');
+    else if(d.percent >= 75) cell.classList.add('level-3');
+    else if(d.percent >= 40) cell.classList.add('level-2');
+    else if(d.percent > 0) cell.classList.add('level-1');
+    if(d.isToday) cell.classList.add('today');
+    cell.title = `${d.date} — ${d.hours} ساعت (${d.percent}٪)`;
+    container.appendChild(cell);
+  });
+}
+
+function computeStats(){
+  const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '{}');
+  let streak = 0;
+  const today = new Date();
+  for(let i = 0; i < 365; i++){
+    const d = new Date(today);
+    d.setDate(d.getDate() - i);
+    const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const rec = history[key];
+    if(rec && rec.percent >= 50) streak++;
+    else if(i === 0) continue;
+    else break;
+  }
+  const weekData = getHistoryArray(7);
+  const weekHours = weekData.reduce((s, d) => s + d.hours, 0);
+  const monthData = getHistoryArray(30);
+  const activeDays = monthData.filter(d => d.percent > 0).length;
+  const avgPercent = activeDays > 0 ? Math.round(monthData.reduce((s, d) => s + d.percent, 0) / activeDays) : 0;
+  const perfectDays = monthData.filter(d => d.percent >= 100).length;
+  return { streak, weekHours, avgPercent, perfectDays };
+}
+
+function renderStats(){
+  try{
+    const s = computeStats();
+    const el = id => document.getElementById(id);
+    if(el('stat-streak')) el('stat-streak').textContent = toPersian(s.streak);
+    if(el('stat-week-hours')) el('stat-week-hours').innerHTML = toPersian(Math.round(s.weekHours * 10) / 10) + '<small>ساعت</small>';
+    if(el('stat-avg')) el('stat-avg').textContent = toPersian(s.avgPercent) + '٪';
+    if(el('stat-perfect')) el('stat-perfect').textContent = toPersian(s.perfectDays);
+    renderWeeklyChart(currentRange);
+    renderHeatmap();
+    renderFreeStats();
+  }catch(e){ console.warn('renderStats error:', e); }
+}
+
+document.getElementById('clearHistory').addEventListener('click', () => {
+  if(!confirm('⚠️ آمار پاک می‌شود ولی آرشیو باقی می‌ماند. مطمئنی؟')) return;
+  try{
+    const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '{}');
+    Object.keys(history).forEach(k => {
+      history[k] = {
+        hours: 0, percent: 0, target: history[k].target || 8,
+        items: [], enabled: {}, customItemsSnapshot: [],
+        freeMinutes: 0, freeBlocks: [], note: history[k].note || ''
+      };
+    });
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+  }catch(e){}
+  showToast('🗑️ آمار پاک شد', 'red');
+  renderStats();
+});
+
+/* ═══════════════════════════════════════════════════
+   ARCHIVE
+   ═══════════════════════════════════════════════════ */
+let archiveSearchTerm = '';
+const archiveSearch = document.getElementById('archiveSearch');
+const searchBox = document.getElementById('searchBox');
+const searchClear = document.getElementById('searchClear');
+const searchInfo = document.getElementById('searchInfo');
+
+if(archiveSearch){
+  archiveSearch.addEventListener('input', (e) => {
+    archiveSearchTerm = e.target.value.trim();
+    searchBox.classList.toggle('has-value', archiveSearchTerm.length > 0);
+    renderArchive();
+  });
+}
+if(searchClear){
+  searchClear.addEventListener('click', () => {
+    archiveSearch.value = '';
+    archiveSearchTerm = '';
+    searchBox.classList.remove('has-value');
+    renderArchive();
+    archiveSearch.focus();
+  });
+}
+
+function renderArchive(){
+  const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '{}');
+  const keys = Object.keys(history).sort().reverse();
+  const container = document.getElementById('archiveList');
+  const countEl = document.getElementById('archive-count');
+  if(!container) return;
+
+  const q = archiveSearchTerm;
+  const qNorm = normalizeDigits(q.toLowerCase());
+
+  if(!q) countEl.textContent = toPersian(keys.length) + ' روز';
+
+  if(keys.length === 0){
+    container.innerHTML = `<div class="archive-empty"><span class="e-icon">📭</span>هنوز روزی ثبت نشده است</div>`;
+    if(searchInfo) searchInfo.textContent = '';
+    return;
+  }
+
+  container.innerHTML = '';
+  let renderedCount = 0;
+
+  keys.forEach(key => {
+    const rec = history[key] || {};
+    const dateObj = new Date(key + 'T12:00:00');
+    let weekday = key, jalali = key, dayNum = '', monthName = '';
+    try{
+      weekday = new Intl.DateTimeFormat('fa-IR', { weekday: 'long' }).format(dateObj);
+      jalali = new Intl.DateTimeFormat('fa-IR-u-ca-persian', { year: 'numeric', month: 'long', day: 'numeric' }).format(dateObj);
+      dayNum = new Intl.DateTimeFormat('fa-IR-u-ca-persian', { day: 'numeric' }).format(dateObj);
+      monthName = new Intl.DateTimeFormat('fa-IR-u-ca-persian', { month: 'short' }).format(dateObj);
+    }catch(e){}
+
+    const itemsDone = rec.items || [];
+    const enabledMap = rec.enabled || {};
+    const customSnapshot = rec.customItemsSnapshot || [];
+    const percent = rec.percent || 0;
+    const hours = rec.hours || 0;
+    const target = rec.target || 8;
+    const note = rec.note || '';
+    const isToday = key === todayKey();
+
+    let freeBlocksArr = rec.freeBlocks || [];
+    if(!freeBlocksArr.length && rec.freeMinutes > 0) freeBlocksArr = [{ minutes: rec.freeMinutes, title: '' }];
+
+    let dateMatches = false;
+    const matchedItemIds = [];
+
+    if(!q){
+      dateMatches = true;
+    } else {
+      const searchableDate = normalizeDigits(`${weekday} ${jalali} ${dayNum} ${monthName} ${key}`.toLowerCase());
+      if(searchableDate.includes(qNorm)) dateMatches = true;
+
+      const allCurrentItems = [...document.querySelectorAll('.item')];
+      const snapshotTitles = customSnapshot.map(c => ({ id: c.id, title: c.title, sub: c.subtitle }));
+
+      allCurrentItems.forEach(origItem => {
+        const title = origItem.querySelector('.item-title')?.textContent || '';
+        const sub = origItem.querySelector('.item-sub')?.textContent || '';
+        const searchable = normalizeDigits((title + ' ' + sub).toLowerCase());
+        if(searchable.includes(qNorm)) matchedItemIds.push(origItem.dataset.id);
+      });
+
+      snapshotTitles.forEach(snap => {
+        const searchable = normalizeDigits((snap.title + ' ' + (snap.sub || '')).toLowerCase());
+        if(searchable.includes(qNorm) && !matchedItemIds.includes(snap.id)) matchedItemIds.push(snap.id);
+      });
+
+      if(normalizeDigits('آیتم آزاد azad free').includes(qNorm)){
+        matchedItemIds.push('__free__');
+      } else {
+        const anyBlockMatch = freeBlocksArr.some(b => b.title && normalizeDigits(b.title.toLowerCase()).includes(qNorm));
+        if(anyBlockMatch) matchedItemIds.push('__free__');
+      }
+
+      if(note && normalizeDigits(note.toLowerCase()).includes(qNorm)) matchedItemIds.push('__note__');
+    }
+
+    const dayMatches = dateMatches || matchedItemIds.length > 0;
+    if(!dayMatches) return;
+
+    renderedCount++;
+
+    const day = document.createElement('div');
+    const hasSearchHighlight = q && matchedItemIds.length > 0;
+    day.className = 'archive-day' + ((isToday || hasSearchHighlight) ? ' open' : '');
+
+    const header = document.createElement('div');
+    header.className = 'archive-header';
+    header.innerHTML = `
+      <div class="date-badge"><span class="d-num">${dayNum}</span><span class="d-mon">${monthName}</span></div>
+      <div class="info">
+        <div class="title">${isToday ? '📍 امروز — ' : ''}${weekday}، ${jalali}</div>
+        <div class="sub">${toPersian(hours)} از ${toPersian(target)} ساعت ${hours > target ? '(فراتر از هدف)' : ''}</div>
+        <div class="mini-bar"><div style="width:${Math.min(100, percent)}%"></div></div>
+        <span class="lock-badge">🔒 ${isToday ? 'در حال ثبت' : 'بایگانی‌شده — فقط مشاهده'}</span>
+      </div>
+      <div class="percent-badge">${toPersian(percent)}٪</div>
+    `;
+
+    const details = document.createElement('div');
+    details.className = 'archive-details';
+
+    document.querySelectorAll('.item').forEach(origItem => {
+      const id = origItem.dataset.id;
+      const title = origItem.querySelector('.item-title')?.textContent || id;
+      const time = origItem.querySelector('.item-time')?.textContent || '';
+      const emoji = origItem.querySelector('.emoji')?.textContent || '•';
+      const isCustom = origItem.dataset.custom === 'true';
+      const isDone = itemsDone.includes(id);
+      const isEnabled = enabledMap[id] !== false;
+      const isHighlighted = q && matchedItemIds.includes(id);
+
+      const row = document.createElement('div');
+      let classes = 'archive-item';
+      if(isDone) classes += ' done';
+      if(!isEnabled) classes += ' disabled-row';
+      if(isHighlighted) classes += ' highlight';
+      row.className = classes;
+      row.setAttribute('data-kind', isCustom ? 'custom' : 'regular');
+
+      const nameText = !isEnabled ? `${title} (غیرفعال)` : title;
+
+      row.innerHTML = `
+        <span class="a-emoji">${emoji}</span>
+        <span class="a-name">${nameText}</span>
+        <span class="a-time">${time}</span>
+        <span class="a-status">${isEnabled ? '✓' : '×'}</span>
+      `;
+      details.appendChild(row);
+    });
+
+    customSnapshot.forEach(c => {
+      const stillExists = document.querySelector(`.item[data-id="${c.id}"]`);
+      if(stillExists) return;
+      const isDone = itemsDone.includes(c.id);
+      const isEnabled = enabledMap[c.id] !== false;
+      const isHighlighted = q && matchedItemIds.includes(c.id);
+
+      const row = document.createElement('div');
+      let classes = 'archive-item';
+      if(isDone) classes += ' done';
+      if(!isEnabled) classes += ' disabled-row';
+      if(isHighlighted) classes += ' highlight';
+      row.className = classes;
+      row.setAttribute('data-kind', 'custom');
+
+      const nameText = !isEnabled ? `${c.title} (غیرفعال) [حذف‌شده]` : `${c.title} [حذف‌شده]`;
+
+      row.innerHTML = `
+        <span class="a-emoji">${escapeHtml(c.emoji || '📌')}</span>
+        <span class="a-name">${escapeHtml(nameText)}</span>
+        <span class="a-time">${toPersian(c.hours)} ساعت</span>
+        <span class="a-status">${isEnabled ? '✓' : '×'}</span>
+      `;
+      details.appendChild(row);
+    });
+
+    if(freeBlocksArr.length > 0){
+      const isFreeHighlighted = q && matchedItemIds.includes('__free__');
+      freeBlocksArr.forEach(blk => {
+        const row = document.createElement('div');
+        row.className = 'archive-item done' + (isFreeHighlighted ? ' highlight' : '');
+        row.setAttribute('data-kind', 'free');
+        const titleText = blk.title ? blk.title : 'فعالیت آزاد';
+        row.innerHTML = `
+          <span class="a-emoji">✨</span>
+          <span class="a-name">${escapeHtml(titleText)}</span>
+          <span class="a-time">${toPersian(blk.minutes || 0)} دقیقه</span>
+          <span class="a-status">✓</span>
+        `;
+        details.appendChild(row);
+      });
+    }
+
+    if(note){
+      const noteDiv = document.createElement('div');
+      noteDiv.className = 'archive-note' + ((q && matchedItemIds.includes('__note__')) ? ' highlight' : '');
+      noteDiv.innerHTML = `<span class="note-label">📝 یادداشت روز</span>${escapeHtml(note)}`;
+      details.appendChild(noteDiv);
+    }
+
+    day.appendChild(header);
+    day.appendChild(details);
+    header.addEventListener('click', () => day.classList.toggle('open'));
+    container.appendChild(day);
+  });
+
+  if(q){
+    countEl.textContent = toPersian(renderedCount) + ' از ' + toPersian(keys.length) + ' روز';
+    if(renderedCount === 0){
+      container.innerHTML = `<div class="archive-empty"><span class="e-icon">🔍</span>نتیجه‌ای برای «<strong style="color:var(--accent-light)">${escapeHtml(q)}</strong>» پیدا نشد</div>`;
+      if(searchInfo) searchInfo.textContent = '';
+    } else {
+      if(searchInfo) searchInfo.innerHTML = `🔍 <strong>${toPersian(renderedCount)}</strong> روز پیدا شد`;
+    }
+  } else {
+    if(searchInfo) searchInfo.textContent = '';
+  }
+}
+
+document.getElementById('clearArchive').addEventListener('click', () => {
+  if(!confirm('⚠️ کل آرشیو پاک می‌شود. مطمئنی؟')) return;
+  localStorage.removeItem(HISTORY_KEY);
+  showToast('🗑️ آرشیو پاک شد', 'red');
+  renderArchive();
+  renderStats();
+});
+
+/* ═══════════════════════════════════════════════════
+   EXPORT / IMPORT
+   ═══════════════════════════════════════════════════ */
+function downloadFile(content, filename, mime){
+  const blob = new Blob([content], { type: mime });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function exportJSONData(){
+  try{
+    const data = {
+      app: 'hawzah-checklist', version: 9,
+      exportedAt: new Date().toISOString(),
+      settings,
+      state: JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'),
+      history: JSON.parse(localStorage.getItem(HISTORY_KEY) || '{}'),
+      customItems,
+      order: JSON.parse(localStorage.getItem(ORDER_KEY) || '{}')
+    };
+    downloadFile(JSON.stringify(data, null, 2), `hawzah-backup-${todayKey()}.json`, 'application/json');
+    const dayCount = Object.keys(data.history).length;
+    showToast(`📥 JSON ذخیره شد (${toPersian(dayCount)} روز)`);
+  }catch(e){ console.warn(e); showToast('❌ خطا در خروجی', 'red'); }
+}
+
+function exportCSVData(){
+  try{
+    const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '{}');
+    const keys = Object.keys(history).sort();
+    let csv = '\uFEFF';
+    csv += 'تاریخ میلادی,تاریخ شمسی,روز هفته,هدف روز,ساعت انجام‌شده,درصد,دقیقه آزاد,عنوان‌های آزاد,تعداد آیتم,یادداشت\n';
+    keys.forEach(key => {
+      const rec = history[key] || {};
+      const dateObj = new Date(key + 'T12:00:00');
+      let jalali = key, weekday = '';
+      try{
+        jalali = new Intl.DateTimeFormat('fa-IR-u-ca-persian', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(dateObj);
+        weekday = new Intl.DateTimeFormat('fa-IR', { weekday: 'long' }).format(dateObj);
+      }catch(e){}
+      const itemsDone = rec.items || [];
+      let freeBlocksArr = rec.freeBlocks || [];
+      if(!freeBlocksArr.length && rec.freeMinutes > 0) freeBlocksArr = [{ minutes: rec.freeMinutes, title: '' }];
+      const freeMin = freeBlocksArr.reduce((s, b) => s + (b.minutes || 0), 0);
+      const freeTitlesStr = freeBlocksArr.map(b => b.title ? `${b.title} (${b.minutes}د)` : `${b.minutes}د`).filter(Boolean).join(' | ');
+      const escape = (s) => `"${String(s || '').replace(/"/g, '""')}"`;
+      csv += [key, jalali, weekday, (rec.target || 8).toString(), (rec.hours || 0).toString(), (rec.percent || 0).toString(), freeMin.toString(), escape(freeTitlesStr), itemsDone.length.toString(), escape(rec.note || '')].join(',') + '\n';
+    });
+    downloadFile(csv, `hawzah-report-${todayKey()}.csv`, 'text/csv;charset=utf-8');
+    showToast(`📊 CSV ذخیره شد (${toPersian(keys.length)} روز)`);
+  }catch(e){ console.warn(e); showToast('❌ خطا در CSV', 'red'); }
+}
+
+document.getElementById('exportJSON').addEventListener('click', exportJSONData);
+document.getElementById('exportJSON2').addEventListener('click', exportJSONData);
+document.getElementById('exportCSV').addEventListener('click', exportCSVData);
+document.getElementById('exportCSV2').addEventListener('click', exportCSVData);
+
+const importFileGlobal = document.getElementById('importFileGlobal');
+document.getElementById('importJSON').addEventListener('click', () => { importFileGlobal.value = ''; importFileGlobal.click(); });
+
+importFileGlobal.addEventListener('change', (e) => {
+  const file = e.target.files?.[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    try{
+      const data = JSON.parse(ev.target.result);
+      if(!data || typeof data !== 'object') throw new Error('invalid');
+      const incomingHistory = data.history && typeof data.history === 'object' ? data.history : null;
+      if(!incomingHistory) throw new Error('no history');
+      const incomingCount = Object.keys(incomingHistory).length;
+      if(incomingCount === 0){ showToast('⚠️ فایل خالی است', 'gold'); return; }
+
+      const existing = JSON.parse(localStorage.getItem(HISTORY_KEY) || '{}');
+      const existingCount = Object.keys(existing).length;
+
+      const mode = confirm(
+        `📤 بازیابی پشتیبان\n\nفایل شامل ${incomingCount} روز است.\nشما الان ${existingCount} روز دارید.\n\n«تأیید» = ادغام\n«لغو» = جایگزینی کامل`
+      );
+
+      const merged = mode ? { ...existing, ...incomingHistory } : incomingHistory;
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(merged));
+
+      if(data.settings && typeof data.settings === 'object'){
+        settings = { ...settings, ...data.settings };
+        saveSettings(settings);
+        applySettings();
+      }
+      if(Array.isArray(data.customItems)){
+        customItems = data.customItems;
+        saveCustomItems(customItems);
+      }
+      if(data.order){
+        saveOrder(data.order);
+        applyOrder();
+      }
+
+      renderArchive(); renderStats();
+      showToast(`✓ بازیابی شد (${toPersian(Object.keys(merged).length)} روز)`, 'gold');
+    }catch(err){
+      console.warn(err);
+      showToast('❌ فایل JSON نامعتبر', 'red');
+    }
+  };
+  reader.readAsText(file);
+});
+
+/* ═══════════════════════════════════════════════════
+   REMINDERS
+   ═══════════════════════════════════════════════════ */
+const reminderBtn = document.getElementById('reminderBtn');
+
+function updateReminderBtn(){
+  if(!reminderBtn) return;
+  const on = settings.reminderEnabled && 'Notification' in window && Notification.permission === 'granted';
+  reminderBtn.classList.toggle('active', on);
+  reminderBtn.innerHTML = on ? '🔔 یادآورها فعال' : '🔕 یادآورها';
+}
+
+async function ensureNotificationPermission(){
+  if(!('Notification' in window)) return false;
+  if(Notification.permission === 'granted') return true;
+  if(Notification.permission === 'denied') return false;
+  try{ return (await Notification.requestPermission()) === 'granted'; }catch(e){ return false; }
+}
+
+async function toggleReminder(){
+  if(!settings.reminderEnabled){
+    const ok = await ensureNotificationPermission();
+    if(!ok){ showToast('❌ اجازه اعلان داده نشد', 'red'); return; }
+    settings.reminderEnabled = true;
+    saveSettings(settings);
+    showToast(`🔔 یادآورها فعال شد — ${settings.reminder1Time} و ${settings.reminder2Time}`);
+    try{
+      new Notification('✅ یادآورها فعال شد', {
+        body: `یادآور اول: ${settings.reminder1Time}\nیادآور دوم: ${settings.reminder2Time}`,
+        icon: window.__faviconData, dir: 'rtl', lang: 'fa'
+      });
+    }catch(e){}
+  } else {
+    settings.reminderEnabled = false;
+    saveSettings(settings);
+    showToast('🔕 یادآورها خاموش شد', 'gold');
+  }
+  updateReminderBtn();
+  applySettings();
+}
+
+if(reminderBtn) reminderBtn.addEventListener('click', toggleReminder);
+
+async function showReminder(title, body, tag){
+  const opts = { body, icon: window.__faviconData, badge: window.__faviconData, tag, requireInteraction: true, dir: 'rtl', lang: 'fa' };
+  try{
+    if(settings.swReminder && swRegistration && 'showNotification' in swRegistration){
+      await swRegistration.showNotification(title, opts);
+    } else if('Notification' in window && Notification.permission === 'granted'){
+      new Notification(title, opts);
+    }
+  }catch(e){ console.warn(e); }
+}
+
+function checkReminders(){
+  if(!settings.reminderEnabled) return;
+  if(!('Notification' in window) || Notification.permission !== 'granted') return;
+
+  const now = new Date();
+  const hhmm = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+  const key = todayKey();
+
+  const fired = JSON.parse(localStorage.getItem(REMINDER_LAST_KEY) || '{}');
+  const todayFired = fired[key] || {};
+  const { percent } = computeProgress();
+
+  if(hhmm === settings.reminder1Time && !todayFired.r1){
+    if(percent < 100){
+      showReminder('⏰ یادآوری زودتر', `پیشرفت امروزت: ${toPersian(percent)}٪ — اگر کاری مونده، الان وقت خوبیه`, 'reminder-1');
+      showToast('⏰ یادآوری اول', 'gold');
+    }
+    todayFired.r1 = true;
+    fired[key] = todayFired;
+    localStorage.setItem(REMINDER_LAST_KEY, JSON.stringify(fired));
+  }
+
+  if(hhmm === settings.reminder2Time && !todayFired.r2){
+    if(percent < 100){
+      showReminder('🌙 پایان روز نزدیک است', `پیشرفت نهایی امروز: ${toPersian(percent)}٪ — قبل از بایگانی، همه‌چیز رو ثبت کن`, 'reminder-2');
+      showToast('🌙 یادآوری پایان روز', 'gold');
+    }
+    todayFired.r2 = true;
+    fired[key] = todayFired;
+    localStorage.setItem(REMINDER_LAST_KEY, JSON.stringify(fired));
+  }
+}
+
+setInterval(checkReminders, 20000);
+setTimeout(checkReminders, 3000);
+
+/* ═══════════════════════════════════════════════════
+   FIREBASE
+   ═══════════════════════════════════════════════════ */
+let firebaseApp = null, firestore = null, firestoreFns = null;
+const syncStatusEl = document.getElementById('syncStatus');
+
+function setSyncStatus(text, type='idle'){
+  if(!syncStatusEl) return;
+  syncStatusEl.textContent = text;
+  syncStatusEl.className = 'sync-status ' + type;
+}
+
+async function connectFirebase(){
+  const configRaw = document.getElementById('firebaseConfig').value.trim();
+  const syncKey = document.getElementById('syncKey').value.trim();
+  if(!configRaw || !syncKey){ showToast('❌ config و کد همگام‌سازی الزامی', 'red'); return; }
+  let config;
+  try{ config = JSON.parse(configRaw); }catch(e){ showToast('❌ config نامعتبر', 'red'); setSyncStatus('خطا: JSON نامعتبر', 'err'); return; }
+  if(!config.apiKey || !config.projectId){ showToast('❌ config ناقص', 'red'); setSyncStatus('خطا: config ناقص', 'err'); return; }
+
+  settings.firebaseConfig = configRaw;
+  settings.syncKey = syncKey;
+  saveSettings(settings);
+  setSyncStatus('در حال اتصال...', 'loading');
+
+  try{
+    const { initializeApp } = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js');
+    const firestoreMod = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js');
+    if(firebaseApp){ try{ await firebaseApp.delete(); }catch(e){} }
+    firebaseApp = initializeApp(config);
+    firestore = firestoreMod.getFirestore(firebaseApp);
+    firestoreFns = firestoreMod;
+    const docRef = firestoreMod.doc(firestore, 'syncs', syncKey);
+    await firestoreMod.getDoc(docRef);
+    setSyncStatus(`✅ متصل به «${syncKey}»`, 'ok');
+    showToast('☁️ اتصال برقرار شد');
+  }catch(e){
+    console.warn(e);
+    setSyncStatus('❌ اتصال ناموفق', 'err');
+    showToast('❌ خطا در اتصال', 'red');
+  }
+}
+
+async function uploadToCloud(){
+  if(!firestore || !firestoreFns){ showToast('❌ اول وصل شو', 'red'); return; }
+  setSyncStatus('☁️ در حال آپلود...', 'loading');
+  try{
+    const data = {
+      settings,
+      state: JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'),
+      history: JSON.parse(localStorage.getItem(HISTORY_KEY) || '{}'),
+      customItems,
+      order: JSON.parse(localStorage.getItem(ORDER_KEY) || '{}'),
+      updatedAt: new Date().toISOString()
+    };
+    const docRef = firestoreFns.doc(firestore, 'syncs', settings.syncKey);
+    await firestoreFns.setDoc(docRef, data);
+    const dayCount = Object.keys(data.history).length;
+    setSyncStatus(`✅ آپلود موفق (${dayCount} روز)`, 'ok');
+    showToast(`☁️ آپلود شد (${toPersian(dayCount)} روز)`);
+  }catch(e){
+    console.warn(e);
+    setSyncStatus('❌ آپلود ناموفق', 'err');
+    showToast('❌ خطا در آپلود', 'red');
+  }
+}
+
+async function downloadFromCloud(){
+  if(!firestore || !firestoreFns){ showToast('❌ اول وصل شو', 'red'); return; }
+  setSyncStatus('☁️ در حال دریافت...', 'loading');
+  try{
+    const docRef = firestoreFns.doc(firestore, 'syncs', settings.syncKey);
+    const snap = await firestoreFns.getDoc(docRef);
+    if(!snap.exists()){ setSyncStatus('⚠️ چیزی در ابر نیست', 'idle'); showToast('⚠️ داده‌ای پیدا نشد', 'gold'); return; }
+    const data = snap.data();
+    if(!data || !data.history){ setSyncStatus('⚠️ داده ناقص', 'err'); return; }
+
+    const incomingCount = Object.keys(data.history).length;
+    const mode = confirm(`⬇️ دریافت از ابر\n\n${incomingCount} روز موجوده.\n\n«تأیید» = ادغام\n«لغو» = جایگزینی کامل`);
+
+    const existing = JSON.parse(localStorage.getItem(HISTORY_KEY) || '{}');
+    const merged = mode ? { ...existing, ...data.history } : data.history;
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(merged));
+
+    if(data.settings){ settings = { ...settings, ...data.settings }; saveSettings(settings); applySettings(); }
+    if(Array.isArray(data.customItems)){ customItems = data.customItems; saveCustomItems(customItems); }
+    if(data.order){ saveOrder(data.order); applyOrder(); }
+
+    renderCustomItems();
+    applyOrder();
+    setupAllDragDrop();
+    renderArchive(); renderStats();
+    setSyncStatus(`✅ دریافت موفق (${incomingCount} روز)`, 'ok');
+    showToast(`⬇️ دریافت شد (${toPersian(incomingCount)} روز)`, 'gold');
+  }catch(e){
+    console.warn(e);
+    setSyncStatus('❌ دریافت ناموفق', 'err');
+    showToast('❌ خطا در دریافت', 'red');
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   SETTINGS MODAL
+   ═══════════════════════════════════════════════════ */
+const settingsModal = document.getElementById('settingsModal');
+function openSettings(){ settingsModal.classList.add('show'); document.body.style.overflow = 'hidden'; }
+function closeSettings(){ settingsModal.classList.remove('show'); document.body.style.overflow = ''; }
+
+document.getElementById('settingsBtn').addEventListener('click', openSettings);
+document.getElementById('settingsBtn2').addEventListener('click', openSettings);
+document.getElementById('modalClose').addEventListener('click', closeSettings);
+settingsModal.addEventListener('click', (e) => { if(e.target === settingsModal) closeSettings(); });
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'Escape'){
+    if(settingsModal.classList.contains('show')) closeSettings();
+    if(addItemModal.classList.contains('show')) closeAddItemModal();
+  }
+});
+
+document.querySelectorAll('.theme-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    settings.theme = btn.dataset.theme;
+    saveSettings(settings); applySettings();
+    showToast(`🎨 تم: ${btn.querySelector('.theme-name').textContent}`);
+  });
+});
+
+document.querySelectorAll('.accent-swatch').forEach(sw => {
+  sw.addEventListener('click', () => { settings.accent = sw.dataset.accent; saveSettings(settings); applySettings(); });
+});
+document.getElementById('customAccent').addEventListener('input', (e) => { settings.accent = e.target.value; saveSettings(settings); applySettings(); });
+
+document.querySelectorAll('#fontSizeSeg button').forEach(btn => {
+  btn.addEventListener('click', () => { settings.fontScale = btn.dataset.val; saveSettings(settings); applySettings(); });
+});
+document.querySelectorAll('#titleFontGrid .font-btn').forEach(btn => {
+  btn.addEventListener('click', () => { settings.titleFont = btn.dataset.font; saveSettings(settings); applySettings(); showToast(`🎨 فونت عناوین: ${btn.textContent.trim()}`); });
+});
+document.querySelectorAll('#bodyFontGrid .font-btn').forEach(btn => {
+  btn.addEventListener('click', () => { settings.bodyFont = btn.dataset.font; saveSettings(settings); applySettings(); showToast(`🎨 فونت متن: ${btn.textContent.trim()}`); });
+});
+
+document.getElementById('auroraToggle').addEventListener('change', (e) => { settings.aurora = e.target.checked; saveSettings(settings); applySettings(); });
+document.getElementById('noiseToggle').addEventListener('change', (e) => { settings.noise = e.target.checked; saveSettings(settings); applySettings(); });
+document.getElementById('reminderToggle').addEventListener('change', async (e) => {
+  if(e.target.checked){
+    const ok = await ensureNotificationPermission();
+    if(!ok){ e.target.checked = false; showToast('❌ اجازه اعلان داده نشد', 'red'); return; }
+    settings.reminderEnabled = true; showToast('🔔 یادآورها فعال شد');
+  } else { settings.reminderEnabled = false; showToast('🔕 یادآورها خاموش شد', 'gold'); }
+  saveSettings(settings); updateReminderBtn();
+});
+document.getElementById('swReminderToggle').addEventListener('change', (e) => {
+  settings.swReminder = e.target.checked; saveSettings(settings);
+  if(e.target.checked && !swRegistration) showToast('⚠️ فایل sw.js پیدا نشد', 'gold');
+});
+document.getElementById('reminder1Time').addEventListener('change', (e) => { settings.reminder1Time = e.target.value; saveSettings(settings); });
+document.getElementById('reminder2Time').addEventListener('change', (e) => { settings.reminder2Time = e.target.value; saveSettings(settings); });
+document.getElementById('firebaseConfig').addEventListener('input', (e) => { settings.firebaseConfig = e.target.value; saveSettings(settings); });
+document.getElementById('syncKey').addEventListener('input', (e) => { settings.syncKey = e.target.value; saveSettings(settings); });
+
+document.getElementById('cloudConnect').addEventListener('click', connectFirebase);
+document.getElementById('cloudUpload').addEventListener('click', uploadToCloud);
+document.getElementById('cloudDownload').addEventListener('click', downloadFromCloud);
+
+document.getElementById('resetAllSettings').addEventListener('click', () => {
+  if(!confirm('همهٔ تنظیمات به حالت پیش‌فرض برمی‌گردد. مطمئنی؟')) return;
+  settings = { ...DEFAULT_SETTINGS };
+  saveSettings(settings); applySettings();
+  showToast('↺ تنظیمات پیش‌فرض', 'gold');
+});
+
+/* ═══════════════════════════════════════════════════
+   DATE & TIME
+   ═══════════════════════════════════════════════════ */
+function updateClock(){
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2, '0');
+  const m = String(now.getMinutes()).padStart(2, '0');
+  const s = String(now.getSeconds()).padStart(2, '0');
+  const el = document.getElementById('liveClock');
+  if(el) el.textContent = `${toPersian(h)}:${toPersian(m)}:${toPersian(s)}`;
+}
+function updateJalali(){
+  const el = document.getElementById('jalaliDate');
+  if(!el) return;
+  try{ el.textContent = new Intl.DateTimeFormat('fa-IR-u-ca-persian', { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date()); }catch(e){ el.textContent = '—'; }
+}
+function updateHijri(){
+  const el = document.getElementById('hijriDate');
+  if(!el) return;
+  try{ el.textContent = new Intl.DateTimeFormat('fa-IR-u-ca-islamic', { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date()).replace(' هجری قمری', ''); }catch(e){ el.textContent = '—'; }
+}
+function updateGregorian(){
+  const el = document.getElementById('gregorianDate');
+  if(!el) return;
+  try{
+    const now = new Date();
+    const monthsFa = ['ژانویه','فوریه','مارس','آوریل','مه','ژوئن','ژوئیه','اوت','سپتامبر','اکتبر','نوامبر','دسامبر'];
+    el.textContent = `${toPersian(now.getDate())} ${monthsFa[now.getMonth()]} ${toPersian(now.getFullYear())}`;
+  }catch(e){ el.textContent = '—'; }
+}
+
+/* ═══════════════════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════════════════ */
+try{ applySettings(); }catch(e){ console.warn('applySettings:', e); }
+try{ loadState(); }catch(e){ console.warn('loadState:', e); }
+
+/* هر بخش مستقل — اگر یکی خطا بده، بقیه سالمن */
+try{ update(); }catch(e){ console.warn('update:', e); }
+try{ updateClock(); }catch(e){ console.warn('clock:', e); }
+try{ updateJalali(); }catch(e){ console.warn('jalali:', e); }
+try{ updateHijri(); }catch(e){ console.warn('hijri:', e); }
+try{ updateGregorian(); }catch(e){ console.warn('gregorian:', e); }
+try{ updateNotesCount(); }catch(e){ console.warn('notesCount:', e); }
+try{ updateReminderBtn(); }catch(e){ console.warn('reminderBtn:', e); }
+
+setInterval(() => { try{ updateClock(); }catch(e){} }, 1000);
+setInterval(() => {
+  try{ updateJalali(); }catch(e){}
+  try{ updateHijri(); }catch(e){}
+  try{ updateGregorian(); }catch(e){}
+}, 60000);
+</script>
+</body>
+</html>
